@@ -1,1 +1,2 @@
 export const NEXT_BALL = 'NEXT_BALL';
+export const GOTO_GAME_DETAILS_PAGE='GOTO_GAME_DETAILS_PAGE';
