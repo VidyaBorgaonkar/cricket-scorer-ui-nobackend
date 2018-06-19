@@ -5,7 +5,7 @@ import {updateScore} from './scoreActions';
 import {initialScoreBoard} from './scoreReducer';
 
 const ScoreBoard = (props = initialScoreBoard) => {
-    console.log({props})
+
     const isOtherTeamPlayed = props.scoreboard[1].overs !== 0;
     return (
         <Container>
@@ -58,6 +58,7 @@ const mapToProps = (state) => {
     }
 };
 
+// to be removed
 const mapDispatchToProps = (dispatch) => {
     return {
         updateScoreboard: (thisBallData) => dispatch(updateScore(thisBallData))
