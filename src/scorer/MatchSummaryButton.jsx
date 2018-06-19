@@ -12,9 +12,9 @@ import Col from 'reactstrap/lib/Col';
 const pushGameDetailsIntoHistory = () => history.push(Routes.GAME_DETAILS);
 
 const MatchSummaryButton = () =>
-    <Container className="h-100">
+    <Container className="h-100 mt-3 mb-3">
         <Row className="align-items-center h-100">
-            <Col className="text-right">
+            <Col className="text-center">
                 <Button color="primary"
                         onClick={pushGameDetailsIntoHistory}>
                     Stats

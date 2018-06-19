@@ -6,7 +6,7 @@ import ScoreBoard from '../scorer/Scoreboard';
 
 const GameDetails = () => (
     <Container className="h-100">
-        <Row className="align-items-center h-100">
+        <Row className="h-100">
             <ScoreBoard/>
         </Row>
     </Container>
