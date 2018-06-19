@@ -6,13 +6,13 @@ const updateCurrentOver = (state = initialState, action) => {
     switch (action.type) {
         case NEXT_BALL:
 
-            let {run,extras=[]}=action.payload;
+            let {runs,extras=[]}=action.payload;
             let currentBallDetails='';
 
             let {ballsRemaining}=state;
 
-            if(run){
-                currentBallDetails+=run
+            if(runs){
+                currentBallDetails+=runs
             }
             if(extras.length!=0){
                 currentBallDetails+=extras

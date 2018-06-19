@@ -11,7 +11,7 @@ const ThisBall = (props) =>
             <Container>
                 <Row>
                     <Col md={{size: 6, offset: 3}}>
-                        Bowler: {props.bowler}
+                        This Ball
                     </Col>
                 </Row>
                 <br/>

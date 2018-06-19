@@ -47,11 +47,11 @@ describe('gameInformation/reducer', () => {
     });
 });
 
-export const updateScore = (run=0,extras=[],isOut=false) => {
+export const updateScore = (runs=0,extras=[],isOut=false) => {
     return {
         type: NEXT_BALL,
         payload: {
-            run,extras,isOut
+            runs,extras,isOut
         }
     }
 };

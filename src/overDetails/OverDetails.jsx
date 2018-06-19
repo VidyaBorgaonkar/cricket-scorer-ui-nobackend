@@ -18,12 +18,19 @@ const OverDetails = (props ) => {
                     </Row>
                 </Col>
             </Row>
+            <Row>
+                <Col xs="12">
+                    Bowler: {props.bowler}
+                </Col>
+            </Row>
+
         </Container>);
 };
 
 const mapToProps = (state) => {
     return {
-        currentOverDetails: state.currentOverDetails
+        currentOverDetails: state.currentOverDetails,
+        bowler: state.currentPlayers.bowler
     }
 };
 
