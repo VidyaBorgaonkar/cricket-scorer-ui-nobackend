@@ -5,7 +5,7 @@ import {initialScoreBoard} from './scoreReducer';
 
 const ScoreBoard = (props = initialScoreBoard) => {
 
-    const otherTeamIndex = props.currentTeamIndex == 0 ? 1 : 0;
+    const otherTeamIndex = props.currentTeamIndex === 0 ? 1 : 0;
     const isOtherTeamPlayed = props.scoreboard[otherTeamIndex].overs !== 0;
 
     return (
