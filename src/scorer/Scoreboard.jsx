@@ -1,7 +1,6 @@
 import React from 'react';
 import {Col, Container, Row} from 'reactstrap';
 import {connect} from 'react-redux';
-import {updateScore} from './scoreActions';
 import {initialScoreBoard} from './scoreReducer';
 
 const ScoreBoard = (props = initialScoreBoard) => {
@@ -21,7 +20,7 @@ const ScoreBoard = (props = initialScoreBoard) => {
                         <Col sm="1" xs="2"/>
                         <Col style={{textAlign: "right"}}>
                             <b>{props.scoreboard[props.currentTeamIndex].total}/{props.scoreboard[props.currentTeamIndex].wickets} in
-                                &nbsp;{props.scoreboard[props.currentTeamIndex].overs}/{props.totalNoOfOvers}</b>
+                                &nbsp;{props.scoreboard[props.currentTeamIndex].overs.toFixed(1)}/{props.totalNoOfOvers}</b>
                         </Col>
                     </Row>
                 </Col>
@@ -36,7 +35,7 @@ const ScoreBoard = (props = initialScoreBoard) => {
                             </Col>
                             <Col style={{textAlign: "right"}}>
                                 {props.scoreboard[otherTeamIndex].total}/{props.scoreboard[otherTeamIndex].wickets} in
-                                &nbsp;{props.scoreboard[otherTeamIndex].overs}/{props.totalNoOfOvers}
+                                &nbsp;{props.scoreboard[otherTeamIndex].overs}.toFixed(1)/{props.totalNoOfOvers}
                             </Col>
                         </Row>
                     </Col>
@@ -62,10 +61,4 @@ const mapToProps = (state) => {
     }
 };
 
-// to be removed
-const mapDispatchToProps = (dispatch) => {
-    return {
-        updateScoreboard: (thisBallData) => dispatch(updateScore(thisBallData))
-    }
-};
-export default connect(mapToProps, mapDispatchToProps)(ScoreBoard);
+export default connect(mapToProps)(ScoreBoard);
