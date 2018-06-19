@@ -7,7 +7,6 @@ export const updateScore = (data) => {
         bowler: data.bowler,
         runs: data.selectedRuns
     }
-    console.log(payload)
     return {
         type: NEXT_BALL,
         payload: payload

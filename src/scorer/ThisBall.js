@@ -1,40 +1,43 @@
 import React from 'react';
-import {Container, Row, Col, Button, ButtonToolbar, ButtonGroup} from 'reactstrap';
+import {Button, ButtonGroup, Col, Container, Row} from 'reactstrap';
 import {connect} from "react-redux";
-import {CREATE_GAME, createGameAction} from "../home/actions";
-import history from "../routes/history";
-import {Routes} from "../routes/routes";
 import {selectBatsman, selectRunsScored, updateScore} from "./scoreActions";
 
 
-const ThisBall = (props) => 
+const createRunsButton=(props,score)=>
+    <Button color="primary" className="m-3 px-3" outline onClick={() => props.selectRunsScored(score)} active={props.selectedRuns === score}>{score}</Button>
+
+
+const ThisBall = (props) =>
             <Container>
                 <Row>
                     <Col md={{size: 6, offset: 3}}>
-                        Bowler: {props.bowler}
+                        <b>This Ball</b>
                     </Col>
                 </Row>
                 <br/>
                 <Row>
-                    <Col md={{size: 6, offset: 3}}>
+                    <Col md={{size: 6, offset: 3}} className="text-center">
                         <ButtonGroup>
-                            <Button color="primary" onClick={() => props.selectBatsman(props.batsmen[0])} active={props.selectedBatsman === props.batsmen[0]}>{props.batsmen[0]}</Button>
-                            <Button color="primary" onClick={() => props.selectBatsman(props.batsmen[1])} active={props.selectedBatsman === props.batsmen[1]}>{props.batsmen[1]}</Button>
+                            <Button outline color="primary" onClick={() => props.selectBatsman(props.batsmen[0])}
+                                    active={props.selectedBatsman === props.batsmen[0]}>{props.batsmen[0]}</Button>
+                            <Button outline color="primary" onClick={() => props.selectBatsman(props.batsmen[1])}
+                                    active={props.selectedBatsman === props.batsmen[1]}>{props.batsmen[1]}</Button>
                         </ButtonGroup>
                     </Col>
                 </Row>
                 <br/>
                 <Row>
                     <Col md={{size: 6, offset: 3}} sm="12">
-                        <ButtonGroup>
-                            <Button color="primary" onClick={() => props.selectRunsScored(0)} active={props.selectedRuns === 0}>0</Button>
-                            <Button color="primary" onClick={() => props.selectRunsScored(1)} active={props.selectedRuns === 1}>1</Button>
-                            <Button color="primary" onClick={() => props.selectRunsScored(2)} active={props.selectedRuns === 2}>2</Button>
-                            <Button color="primary" onClick={() => props.selectRunsScored(3)} active={props.selectedRuns === 3}>3</Button>
-                            <Button color="primary" onClick={() => props.selectRunsScored(4)} active={props.selectedRuns === 4}>4</Button>
-                            <Button color="primary" onClick={() => props.selectRunsScored(5)} active={props.selectedRuns === 5}>5</Button>
-                            <Button color="primary" onClick={() => props.selectRunsScored(6)} active={props.selectedRuns === 6}>6</Button>
-                            <Button color="primary" onClick={() => props.selectRunsScored(7)} active={props.selectedRuns === 7}>7</Button>
+                        <ButtonGroup style={{display:"inline-block"}}>
+                            {createRunsButton(props,0)}
+                            {createRunsButton(props,1)}
+                            {createRunsButton(props,2)}
+                            {createRunsButton(props,3)}
+                            {createRunsButton(props,4)}
+                            {createRunsButton(props,5)}
+                            {createRunsButton(props,6)}
+                            {createRunsButton(props,7)}
                         </ButtonGroup>
                     </Col>
                 </Row>
@@ -60,7 +63,10 @@ const mapDispatchToProps = (dispatch) => {
     return {
         selectBatsman: (batsmanName) => dispatch(selectBatsman(batsmanName)),
         selectRunsScored: (runsScored) => dispatch(selectRunsScored(runsScored)),
-        onNextBall: (currentBall) => dispatch(updateScore(currentBall))
+        onNextBall: (currentBall) => {
+            if (currentBall.selectedBatsman != '' && currentBall.selectedRuns != -1)
+                dispatch(updateScore(currentBall))
+        }
     }
 };
 
