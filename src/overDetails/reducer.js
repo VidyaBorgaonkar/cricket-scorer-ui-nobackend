@@ -11,10 +11,11 @@ const updateCurrentOver = (state = initialState, action) => {
 
             let {ballsRemaining}=state;
 
-            if(runs){
-                currentBallDetails+=runs
+            if(runs || extras.length===0) {
+                currentBallDetails += runs;
             }
-            if(extras.length!=0){
+
+            if(extras.length!==0){
                 currentBallDetails+=extras
             }
 

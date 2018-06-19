@@ -3,7 +3,6 @@ import {Col, Container, Row} from 'reactstrap';
 import {connect} from 'react-redux';
 
 const OverDetails = (props ) => {
-    console.log({props})
     return (
         <Container className="mt-3 mb-3">
             <Row>
@@ -19,8 +18,12 @@ const OverDetails = (props ) => {
                 </Col>
             </Row>
             <Row>
-                <Col xs="12">
-                    Bowler: {props.bowler}
+                <Col md={{size: 6, offset: 3}}>
+                    <Row>
+                        <Col>
+                            Bowler: {props.bowler}
+                        </Col>
+                    </Row>
                 </Col>
             </Row>
 
