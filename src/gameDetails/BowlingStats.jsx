@@ -56,7 +56,7 @@ function getBowlersAggregateStats(balls) {
     let bowlers = [];
     Object.keys(aggregateStats).forEach((key) => {
         let stats = aggregateStats[key];
-        stats.overs = Math.round(stats.balls / 6) + "." + Math.round(stats.balls % 6);
+        stats.overs = Math.floor(stats.balls / 6) + "." + stats.balls % 6;
         bowlers.push(stats);
     });
     return bowlers;
