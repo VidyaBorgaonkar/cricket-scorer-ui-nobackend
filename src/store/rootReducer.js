@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
     scoreInformation,
     currentPlayers: updateCurrentPlayers,
     currentBall: updateCurrentBall,
-    currentOverDetails:updateCurrentOver,
+    currentOverDetails: updateCurrentOver,
     balls: updateBallsBowled
 });
 

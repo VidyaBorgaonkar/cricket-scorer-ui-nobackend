@@ -41,6 +41,7 @@ function getBowlersAggregateStats(balls) {
         if (bowlerName in aggregateStats) {
             aggregateStats[bowlerName].balls += 1;
             aggregateStats[bowlerName].runs += ball.runs;
+            aggregateStats[bowlerName].ballByBallRuns = [...aggregateStats[bowlerName].ballByBallRuns, ball.runs];
         }
         else {
             aggregateStats[bowlerName] = {
@@ -49,14 +50,22 @@ function getBowlersAggregateStats(balls) {
                 overs: 0,
                 maidens: 0,
                 runs: ball.runs,
+                ballByBallRuns: [ball.runs],
                 wickets: 0
             };
         }
     });
     let bowlers = [];
     Object.keys(aggregateStats).forEach((key) => {
-        let stats = aggregateStats[key];
-        stats.overs = Math.floor(stats.balls / 6) + "." + stats.balls % 6;
+        const stats = aggregateStats[key];
+        const completedOvers = Math.floor(stats.balls / 6);
+        const ballByBallRuns = [...stats.ballByBallRuns];
+        let noOfMaidens = 0;
+        for (var i = 0; i < completedOvers; i++) {
+            ballByBallRuns.splice(0, 6).reduce((acc, val) => acc + val) == 0 ? noOfMaidens++ : null;
+        }
+        stats.overs = completedOvers + "." + stats.balls % 6;
+        stats.maidens = noOfMaidens;
         bowlers.push(stats);
     });
     return bowlers;
