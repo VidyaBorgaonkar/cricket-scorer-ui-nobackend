@@ -20,7 +20,7 @@ const ScoreBoard = (props = initialScoreBoard) => {
                         <Col sm="1" xs="2"/>
                         <Col style={{textAlign: "right"}}>
                             <b>{props.scoreboard[props.currentTeamIndex].total}/{props.scoreboard[props.currentTeamIndex].wickets} in
-                                &nbsp;{props.scoreboard[props.currentTeamIndex].overs.toFixed(1)}/{props.totalNoOfOvers}</b>
+                                &nbsp;{props.oversPlayed}/{props.totalNoOfOvers}</b>
                         </Col>
                     </Row>
                 </Col>
@@ -57,7 +57,8 @@ const mapToProps = (state) => {
     return {
         currentTeamIndex: state.scoreInformation.currentTeamIndex,
         scoreboard: state.scoreInformation.scoreboard,
-        totalNoOfOvers: state.gameInformation.numberOfOvers
+        totalNoOfOvers: state.gameInformation.numberOfOvers,
+        oversPlayed: state.currentOverDetails.totalOvers
     }
 };
 
