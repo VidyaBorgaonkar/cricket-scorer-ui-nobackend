@@ -35,3 +35,40 @@ describe('currentBallReducerOnNewBallAction', () => {
     });
 });
 
+
+describe('currentBallReducerOnSelectBatsmanAction', () => {
+    it('should update batsman name for SelectBatsmanAction',()=> {
+
+        const state ={batsman: "player1", runs:2};
+        const action = {
+            type: SELECT_BATSMAN,
+            payload: "player2"
+        }
+        const newState  = {
+            batsman: "player2",
+            runs: 2
+        };
+
+
+        expect(updateCurrentBall(state, action)).toEqual(newState);
+    });
+});
+
+
+describe('currentBallReducerOnSelectRunsScoredAction', () => {
+    it('should return update runsScored for SelectRunsScoredAction',()=> {
+
+        const state ={batsman: "player1", runs:2};
+        const action = {
+            type: SELECT_RUNS_SCORED,
+            payload: 6
+        }
+        const newState  = {
+            batsman: "player1",
+            runs: 6
+        };
+
+
+        expect(updateCurrentBall(state, action)).toEqual(newState);
+    });
+});
