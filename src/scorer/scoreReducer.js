@@ -11,7 +11,7 @@ const updateScoreboard = (state = initialScoreBoard, action) => {
             return {
                 currentTeamIndex: state.currentTeamIndex,
                 scoreboard: [{
-                    total: state.scoreboard[0].total + action.payload.run,
+                    total: state.scoreboard[0].total + action.payload.runs,
                     wickets: 0,
                     overs: 0
                 }, state.scoreboard[1]]
