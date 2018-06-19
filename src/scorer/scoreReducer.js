@@ -1,4 +1,4 @@
-import {NEXT_BALL} from "./scoreActions"
+import {NEXT_BALL} from "../store/actionConstants"
 
 export const initialScoreBoard = {
     currentTeamIndex: 0,

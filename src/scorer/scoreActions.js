@@ -1,4 +1,4 @@
-export const NEXT_BALL = 'NEXT_BALL';
+import {NEXT_BALL} from "../store/actionConstants"
 
 export const updateScore = (data) => {
     return {

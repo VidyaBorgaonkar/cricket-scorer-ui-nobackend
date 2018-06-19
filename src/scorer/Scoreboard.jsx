@@ -39,8 +39,8 @@ const ScoreBoard = (props = initialScoreBoard) => {
 
 const mapToProps = (state) => {
     return {
-        currentTeamIndex: state.scoreboard.currentTeamIndex,
-        scoreboard: state.scoreboard.scoreboard
+        currentTeamIndex: state.scoreInformation.currentTeamIndex,
+        scoreboard: state.scoreInformation.scoreboard
     }
 };
 
