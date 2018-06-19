@@ -3,13 +3,25 @@ import Button from 'reactstrap/lib/Button';
 import {Routes} from '../routes/routes';
 import history from '../routes/history';
 
-const pushGameDetailsIntoHistory = () => history.push(Routes.GAME_DETAILS)
+
+
+import Container from 'reactstrap/lib/Container';
+import Row from 'reactstrap/lib/Row';
+import Col from 'reactstrap/lib/Col';
+
+const pushGameDetailsIntoHistory = () => history.push(Routes.GAME_DETAILS);
 
 const MatchSummaryButton = () =>
-  <Button color="primary"
-          onClick={pushGameDetailsIntoHistory}>
-      Stats
-  </Button>;
+    <Container className="h-100">
+        <Row className="align-items-center h-100">
+            <Col className="text-right">
+                <Button color="primary"
+                        onClick={pushGameDetailsIntoHistory}>
+                    Stats
+                </Button>
+            </Col>
+        </Row>
+    </Container>;
 
 
 
