@@ -6,7 +6,9 @@ import {initialScoreBoard} from './scoreReducer';
 
 const ScoreBoard = (props = initialScoreBoard) => {
 
-    const isOtherTeamPlayed = props.scoreboard[1].overs !== 0;
+    const otherTeamIndex = props.currentTeamIndex == 0 ? 1 : 0;
+    const isOtherTeamPlayed = props.scoreboard[otherTeamIndex].overs !== 0;
+
     return (
         <Container>
             <br/>
@@ -18,7 +20,8 @@ const ScoreBoard = (props = initialScoreBoard) => {
                         </Col>
                         <Col sm="1" xs="2"/>
                         <Col style={{textAlign: "right"}}>
-                            <b>{props.scoreboard[props.currentTeamIndex].total}/0 in 0/{props.totalNoOfOvers}</b>
+                            <b>{props.scoreboard[props.currentTeamIndex].total}/{props.scoreboard[props.currentTeamIndex].wickets} in
+                                &nbsp;{props.scoreboard[props.currentTeamIndex].overs}/{props.totalNoOfOvers}</b>
                         </Col>
                     </Row>
                 </Col>
@@ -32,7 +35,8 @@ const ScoreBoard = (props = initialScoreBoard) => {
                                 Team 2 scored
                             </Col>
                             <Col style={{textAlign: "right"}}>
-                                120/5 in 12.1/{props.totalNoOfOvers}
+                                {props.scoreboard[otherTeamIndex].total}/{props.scoreboard[otherTeamIndex].wickets} in
+                                &nbsp;{props.scoreboard[otherTeamIndex].overs}/{props.totalNoOfOvers}
                             </Col>
                         </Row>
                     </Col>
