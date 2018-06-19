@@ -1,9 +1,15 @@
 import React from 'react';
 
+import Container from 'reactstrap/lib/Container';
+import Row from 'reactstrap/lib/Row';
+import ScoreBoard from '../scorer/Scoreboard';
+
 const GameDetails = () => (
-  <div>
-    This is the game details page
-  </div>
+    <Container className="h-100">
+        <Row className="align-items-center h-100">
+            <ScoreBoard/>
+        </Row>
+    </Container>
 );
 
 export default GameDetails;
