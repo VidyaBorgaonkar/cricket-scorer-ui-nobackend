@@ -26,10 +26,15 @@ createExtraButton.propTypes = {
 
 const Extras = props => (
   <Row>
-    <Col md={{ size: 3, offset: 3 }} sm="1" className="font-weight-light" >
-      <font size="1" >Extras</font>
+    <Col
+      xs={{ size: 1 }}
+      md={{ offset: 3 }}
+      style={{ fontSize: 12 }}
+      className="mt-2 font-weight-light"
+    >
+      Extras
     </Col>
-    <Col md={{ size: 3, offset: 3 }} sm="8">
+    <Col >
       <ButtonGroup className="d-flex flex-wrap">
         {createExtraButton(props, 'N')}
         {createExtraButton(props, 'W')}
