@@ -15,11 +15,11 @@ const addRow = (stats, index) => (
 );
 
 const BowlingStats = props => (
-  <Container style={{ 'font-size': 'x-small' }}>
+  <Container>
     <Row>
       <Col md={{ size: 6, offset: 3 }}>Bowling Table</Col>
       <Col md={{ size: 6, offset: 3 }}>
-        <Table striped bordered responsive>
+        <Table striped bordered responsive style={{ fontSize: 'x-small' }}>
           <thead>
             <tr>
               <th>Bowler</th>
