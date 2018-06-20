@@ -20,7 +20,7 @@ const createExtraButton = (props, extras) => (
 
 createExtraButton.propTypes = {
   selectExtra: PropTypes.func.isRequired,
-  selectedExtra: PropTypes.array.arrayOf(React.PropTypes.string).isRequired,
+  selectedExtra: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 
