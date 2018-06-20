@@ -15,7 +15,7 @@ const updateCurrentOver = (state = initialState, action) => {
       }
 
       if (extras.length !== 0) {
-        currentBallDetails += extras;
+        currentBallDetails += extras.join('');
       }
 
       if (extras.indexOf('W') === -1 && extras.indexOf('N') === -1) {
