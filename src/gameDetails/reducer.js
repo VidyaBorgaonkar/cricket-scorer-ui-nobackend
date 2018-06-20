@@ -1,6 +1,6 @@
 import { NEXT_BALL } from '../store/actionConstants';
 
-export const updateBallsBowled = (state = [], action) => {
+const updateBallsBowled = (state = [], action) => {
   switch (action.type) {
     case NEXT_BALL:
       return [...state, action.payload];
@@ -8,3 +8,5 @@ export const updateBallsBowled = (state = [], action) => {
       return state;
   }
 };
+
+export default updateBallsBowled;
