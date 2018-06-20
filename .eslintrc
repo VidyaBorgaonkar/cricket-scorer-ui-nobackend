@@ -1,6 +1,6 @@
 {
   "extends": "airbnb",
   "globals": {"document":true, "window":true,"navigator":true},
-  "env": {"jest": true},
+  "env": {"jest": true, "browser":true},
   "plugins": ["jest"]
 }
