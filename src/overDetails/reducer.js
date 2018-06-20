@@ -1,8 +1,6 @@
 import { NEXT_BALL } from '../store/actionConstants';
 
-export const initialState = {
-  overDetails: [], ballsRemaining: 6, totalOvers: 0, totalBalls: 0,
-};
+export const initialState = { overDetails: [], ballsRemaining: 6 };
 
 const updateCurrentOver = (state = initialState, action) => {
   switch (action.type) {
@@ -11,8 +9,6 @@ const updateCurrentOver = (state = initialState, action) => {
       let currentBallDetails = '';
 
       let { ballsRemaining } = state;
-      let { totalOvers } = state;
-      let { totalBalls } = state;
 
       if (runs || extras.length === 0) {
         currentBallDetails += runs;
@@ -24,26 +20,10 @@ const updateCurrentOver = (state = initialState, action) => {
 
       if (extras.indexOf('W') === -1 && extras.indexOf('N') === -1) {
         ballsRemaining -= 1;
-        totalBalls += 1;
-        const completedTotalOvers = Math.floor(totalBalls / 6);
-        totalOvers = `${completedTotalOvers}.${totalBalls % 6}`;
       }
-      if (ballsRemaining <= 0) {
-        const completedTotalOvers = Math.floor(totalBalls / 6);
-        totalOvers = `${completedTotalOvers}.${totalBalls % 6}`;
-        ballsRemaining = 6;
-        return {
-          overDetails: [], ballsRemaining, totalOvers, totalBalls,
-        };
-      }
+      if (ballsRemaining <= 0) return initialState;
 
-      return {
-        overDetails: [
-          ...state.overDetails, currentBallDetails],
-        ballsRemaining,
-        totalOvers,
-        totalBalls,
-      };
+      return { overDetails: [...state.overDetails, currentBallDetails], ballsRemaining };
     }
     default:
       return state;
