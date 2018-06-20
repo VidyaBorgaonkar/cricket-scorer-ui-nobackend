@@ -1,25 +1,34 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button, ButtonGroup, Col, Container, Row } from 'reactstrap';
 import { connect } from 'react-redux';
 import { selectBatsman, selectRunsScored, updateScore } from './scoreActions';
 
 
-const createRunsButton = (props, score) =>
-  (<Button
+const createRunsButton = (props, score) => (
+  <Button
     color="primary"
     className="mx-1 my-1 px-3 rounded"
     style={{
- flexBasis: 40, flexShrink: 0, flexGrow: 0, width: 40,
-}}
+            flexBasis: 40, flexShrink: 0, flexGrow: 0, width: 40,
+        }}
     outline
     onClick={() => props.selectRunsScored(score)}
     active={props.selectedRuns === score}
   >{score}
-   </Button>);
+  </Button>);
+
+createRunsButton.propTypes = {
+
+  selectedRuns: PropTypes.number.isRequired,
+  selectRunsScored: PropTypes.number.isRequired,
 
 
-const RunsToolBar = props =>
-  (<ButtonGroup className="d-flex flex-wrap">
+};
+
+
+const RunsToolBar = props => (
+  <ButtonGroup className="d-flex flex-wrap">
     {createRunsButton(props, 0)}
     {createRunsButton(props, 1)}
     {createRunsButton(props, 2)}
@@ -28,11 +37,12 @@ const RunsToolBar = props =>
     {createRunsButton(props, 5)}
     {createRunsButton(props, 6)}
     {createRunsButton(props, 7)}
+
   </ButtonGroup>);
 
 
-const BatsmenToolBar = props =>
-  (<ButtonGroup>
+const BatsmenToolBar = props => (
+  <ButtonGroup>
     <Button
       outline
       color="primary"
@@ -47,10 +57,19 @@ const BatsmenToolBar = props =>
       active={props.selectedBatsman === props.batsmen[1]}
     >{props.batsmen[1]}
     </Button>
-   </ButtonGroup>);
+  </ButtonGroup>);
 
-const ThisBall = props =>
-  (<Container>
+BatsmenToolBar.propTypes = {
+  batsmen: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+
+  selectedBatsman: PropTypes.string.isRequired,
+
+  selectBatsman: PropTypes.string.isRequired,
+
+};
+
+const ThisBall = props => (
+  <Container>
     <Row>
       <Col md={{ size: 6, offset: 3 }}>
         <b>This Ball</b>
@@ -80,6 +99,17 @@ const ThisBall = props =>
     </Row>
   </Container>);
 
+ThisBall.propTypes = {
+  batsmen: PropTypes.string.isRequired,
+
+  selectedBatsman: PropTypes.string.isRequired,
+  selectedRuns: PropTypes.number.isRequired,
+  selectRunsScored: PropTypes.number.isRequired,
+  selectBatsman: PropTypes.string.isRequired,
+  onNextBall: PropTypes.string.isRequired,
+
+};
+
 
 const mapStateToProps = state => ({
   batsmen: state.currentPlayers.batsmen,
@@ -92,7 +122,9 @@ const mapDispatchToProps = dispatch => ({
   selectBatsman: batsmanName => dispatch(selectBatsman(batsmanName)),
   selectRunsScored: runsScored => dispatch(selectRunsScored(runsScored)),
   onNextBall: (currentBall) => {
-    if (currentBall.selectedBatsman != '' && currentBall.selectedRuns != -1) { dispatch(updateScore(currentBall)); }
+    if (currentBall.selectedBatsman !== '' && currentBall.selectedRuns !== -1) {
+      dispatch(updateScore(currentBall));
+    }
   },
 });
 
