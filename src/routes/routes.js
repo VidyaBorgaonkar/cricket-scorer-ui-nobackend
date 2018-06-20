@@ -9,9 +9,7 @@ import NewGame from '../newGame/NewGame';
 
 export const Routes = {
   HOME: '/',
-  SCORER: '/sc' +
-  '' +
-  'orer',
+  SCORER: '/scorer',
   GAME_DETAILS: '/gameDetails',
   NEW_GAME: '/newGame',
 };
