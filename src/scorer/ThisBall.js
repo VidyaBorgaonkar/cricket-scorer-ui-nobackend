@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, ButtonGroup, Col, Container, Row } from 'reactstrap';
 import { connect } from 'react-redux';
-import { selectBatsman, selectRunsScored, updateScore } from './scoreActions';
 import Extras from './Extras';
+import { selectBatsman, selectRunsScored, updateScore, wicketTaken } from './scoreActions';
 
 
 const createRunsButton = (props, score) => (
@@ -20,11 +20,8 @@ const createRunsButton = (props, score) => (
   </Button>);
 
 createRunsButton.propTypes = {
-
   selectedRuns: PropTypes.number.isRequired,
   selectRunsScored: PropTypes.number.isRequired,
-
-
 };
 
 
@@ -62,11 +59,26 @@ const BatsmenToolBar = props => (
 
 BatsmenToolBar.propTypes = {
   batsmen: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
-
   selectedBatsman: PropTypes.string.isRequired,
-
   selectBatsman: PropTypes.string.isRequired,
 
+};
+
+const OutButton = props => (
+  <ButtonGroup>
+    <Button
+      color="primary"
+      outline
+      onClick={() => props.onOutBtnClick()}
+      active={props.wicketStatus === true}
+    >
+                    Out
+    </Button>
+  </ButtonGroup>);
+
+OutButton.propTypes = {
+  onOutBtnClick: PropTypes.string.isRequired,
+  wicketStatus: PropTypes.bool.isRequired,
 };
 
 const ThisBall = props => (
@@ -95,6 +107,12 @@ const ThisBall = props => (
     <Extras />
     <br />
     <Row>
+      <Col md={{ size: 6, offset: 3 }} className="text-center">
+        <OutButton wicketStatus={props.wicketStatus} onOutBtnClick={props.onOutBtnClick} />
+      </Col>
+    </Row>
+    <br />
+    <Row>
       <Col className="text-center">
         <Button color="primary" onClick={() => props.onNextBall(props)}>Next Ball</Button>
       </Col>
@@ -103,13 +121,13 @@ const ThisBall = props => (
 
 ThisBall.propTypes = {
   batsmen: PropTypes.string.isRequired,
-
   selectedBatsman: PropTypes.string.isRequired,
   selectedRuns: PropTypes.number.isRequired,
-  selectRunsScored: PropTypes.func.isRequired,
-  selectBatsman: PropTypes.func.isRequired,
-  onNextBall: PropTypes.func.isRequired,
-
+  selectRunsScored: PropTypes.number.isRequired,
+  selectBatsman: PropTypes.string.isRequired,
+  onNextBall: PropTypes.string.isRequired,
+  wicketStatus: PropTypes.bool.isRequired,
+  onOutBtnClick: PropTypes.string.isRequired,
 };
 
 
@@ -119,11 +137,13 @@ const mapStateToProps = state => ({
   selectedBatsman: state.currentBall.batsman,
   selectedRuns: state.currentBall.runs,
   extras: state.currentBall.extras,
+  wicketStatus: state.currentBall.wicket,
 });
 
 const mapDispatchToProps = dispatch => ({
   selectBatsman: batsmanName => dispatch(selectBatsman(batsmanName)),
   selectRunsScored: runsScored => dispatch(selectRunsScored(runsScored)),
+  onOutBtnClick: () => dispatch(wicketTaken()),
   onNextBall: (currentBall) => {
     if (currentBall.selectedBatsman !== '' && currentBall.selectedRuns !== -1) {
       dispatch(updateScore(currentBall));
