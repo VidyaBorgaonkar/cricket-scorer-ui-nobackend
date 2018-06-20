@@ -5,13 +5,13 @@ import ScoreBoard from '../scorer/Scoreboard';
 import BowlingStats from './BowlingStats';
 
 const GameDetails = () => (
-    <Container className="h-100">
-        <Row className="h-100">
-            <ScoreBoard/>
-            <BowlingStats/>
-        </Row>
+  <Container className="h-100">
+    <Row className="h-100">
+      <ScoreBoard />
+      <BowlingStats />
+    </Row>
 
-    </Container>
+  </Container>
 );
 
 export default GameDetails;
