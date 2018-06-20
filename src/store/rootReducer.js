@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 import gameInformationReducer from '../newGame/reducer';
 import scoreInformation from '../scorer/scoreReducer';
 import updateCurrentOver from '../overDetails/reducer';
