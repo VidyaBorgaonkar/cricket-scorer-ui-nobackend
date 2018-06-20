@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Button, ButtonGroup, Col, Container, Row } from 'reactstrap';
 import { connect } from 'react-redux';
 import { selectBatsman, selectRunsScored, updateScore } from './scoreActions';
+import Extras from './Extras';
 
 
 const createRunsButton = (props, score) => (
@@ -91,6 +92,7 @@ const ThisBall = props => (
         <RunsToolBar selectedRuns={props.selectedRuns} selectRunsScored={props.selectRunsScored} />
       </Col>
     </Row>
+    <Extras />
     <br />
     <Row>
       <Col className="text-center">
@@ -104,9 +106,9 @@ ThisBall.propTypes = {
 
   selectedBatsman: PropTypes.string.isRequired,
   selectedRuns: PropTypes.number.isRequired,
-  selectRunsScored: PropTypes.number.isRequired,
-  selectBatsman: PropTypes.string.isRequired,
-  onNextBall: PropTypes.string.isRequired,
+  selectRunsScored: PropTypes.func.isRequired,
+  selectBatsman: PropTypes.func.isRequired,
+  onNextBall: PropTypes.func.isRequired,
 
 };
 
@@ -116,6 +118,7 @@ const mapStateToProps = state => ({
   bowler: state.currentPlayers.bowler,
   selectedBatsman: state.currentBall.batsman,
   selectedRuns: state.currentBall.runs,
+  extras: state.currentBall.extras,
 });
 
 const mapDispatchToProps = dispatch => ({
