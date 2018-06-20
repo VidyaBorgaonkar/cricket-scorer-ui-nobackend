@@ -1,6 +1,6 @@
 import React from 'react';
-import {Table} from 'reactstrap';
-import {connect} from 'react-redux';
+import { Table, Container, Row, Col } from 'reactstrap';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import getBowlersAggregateStats from './BowlerAggregation';
 
@@ -15,20 +15,27 @@ const addRow = (stats, index) => (
 );
 
 const BowlingStats = props => (
-  <Table striped bordered responsive>
-    <thead>
-      <tr>
-        <th>Bowler</th>
-        <th>Overs</th>
-        <th>Maiden</th>
-        <th>Runs</th>
-        <th>Wickets</th>
-      </tr>
-    </thead>
-    <tbody>
-      {props.bowlers.map((stat, index) => addRow(stat, index))}
-    </tbody>
-  </Table>
+  <Container style={{ 'font-size': 'x-small' }}>
+    <Row>
+      <Col md={{ size: 6, offset: 3 }}>Bowling Table</Col>
+      <Col md={{ size: 6, offset: 3 }}>
+        <Table striped bordered responsive>
+          <thead>
+            <tr>
+              <th>Bowler</th>
+              <th>Overs</th>
+              <th>Maiden</th>
+              <th>Runs</th>
+              <th>Wickets</th>
+            </tr>
+          </thead>
+          <tbody>
+            {props.bowlers.map((stat, index) => addRow(stat, index))}
+          </tbody>
+        </Table>
+      </Col>
+    </Row>
+  </Container>
 );
 
 BowlingStats.propTypes = {
