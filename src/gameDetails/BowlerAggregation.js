@@ -31,31 +31,31 @@ function getMaidens(completedOvers, ballByBallRuns) {
 }
 
 function updateOverAndMaidens(aggregateStats) {
-  const bowlers = [];
-  Object.keys(aggregateStats).forEach((key) => {
+    return Object.keys(aggregateStats).map((key) => {
     const stats = aggregateStats[key];
     const completedOvers = Math.floor(stats.balls / 6);
     const ballByBallRuns = [...stats.ballByBallRuns];
     stats.overs = completedOvers + ((stats.balls % 6) / 10);
     stats.maidens = getMaidens(completedOvers, ballByBallRuns);
-    bowlers.push(stats);
+        return stats;
   });
-  return bowlers;
 }
 
 const getBowlersAggregateStats = (balls) => {
   if (balls === undefined) {
     return [];
   }
-  const aggregateStats = {};
-  balls.forEach((ball) => {
+    const aggregateStats = balls.reduce((accumulator, ball) => {
     const bowlerName = ball.bowler;
-    if (bowlerName in aggregateStats) {
-      aggregateStats[bowlerName] = updateBowlerStats(aggregateStats[bowlerName], ball);
+        const stats = accumulator;
+        if (bowlerName in stats) {
+            stats[bowlerName] = updateBowlerStats(stats[bowlerName], ball);
     } else {
-      aggregateStats[bowlerName] = initialBowlerStatsObject(ball);
+            stats[bowlerName] = initialBowlerStatsObject(ball);
     }
-  });
+        return stats;
+    }, {});
+
   return updateOverAndMaidens(aggregateStats);
 };
 
