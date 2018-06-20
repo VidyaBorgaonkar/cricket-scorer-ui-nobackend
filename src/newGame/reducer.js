@@ -24,6 +24,6 @@ const initialState = {
   numberOfOvers: 5,
 };
 
-const reducer = (state = initialState, action) => state;
+const reducer = (state = initialState) => state;
 
 export default reducer;
