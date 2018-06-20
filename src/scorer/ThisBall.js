@@ -123,11 +123,11 @@ ThisBall.propTypes = {
   batsmen: PropTypes.string.isRequired,
   selectedBatsman: PropTypes.string.isRequired,
   selectedRuns: PropTypes.number.isRequired,
-  selectRunsScored: PropTypes.number.isRequired,
-  selectBatsman: PropTypes.string.isRequired,
-  onNextBall: PropTypes.string.isRequired,
   wicketStatus: PropTypes.bool.isRequired,
-  onOutBtnClick: PropTypes.string.isRequired,
+  selectRunsScored: PropTypes.func.isRequired,
+  selectBatsman: PropTypes.func.isRequired,
+  onNextBall: PropTypes.func.isRequired,
+  onOutBtnClick: PropTypes.func.isRequired,
 };
 
 
