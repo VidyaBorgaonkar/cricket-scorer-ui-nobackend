@@ -1,6 +1,14 @@
 import reducer from './reducer';
 import { NEXT_BALL } from '../store/actionConstants';
 
+
+const updateScore = (runs = 0, extras = [], isOut = false) => ({
+  type: NEXT_BALL,
+  payload: {
+    runs, extras, isOut,
+  },
+});
+
 describe('gameInformation/reducer', () => {
   it('should return initial state of current over', () => {
     const initialState = { ballsRemaining: 6, overDetails: [] };
@@ -52,9 +60,3 @@ describe('gameInformation/reducer', () => {
   });
 });
 
-export const updateScore = (runs = 0, extras = [], isOut = false) => ({
-  type: NEXT_BALL,
-  payload: {
-    runs, extras, isOut,
-  },
-});

@@ -6,8 +6,7 @@ export const initialState = {
 
 const updateCurrentOver = (state = initialState, action) => {
   switch (action.type) {
-    case NEXT_BALL:
-
+    case NEXT_BALL: {
       const { runs, extras = [] } = action.payload;
       let currentBallDetails = '';
 
@@ -45,6 +44,7 @@ const updateCurrentOver = (state = initialState, action) => {
         totalOvers,
         totalBalls,
       };
+    }
     default:
       return state;
   }
