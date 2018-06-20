@@ -31,13 +31,13 @@ function getMaidens(completedOvers, ballByBallRuns) {
 }
 
 function updateOverAndMaidens(aggregateStats) {
-    return Object.keys(aggregateStats).map((key) => {
+  return Object.keys(aggregateStats).map((key) => {
     const stats = aggregateStats[key];
     const completedOvers = Math.floor(stats.balls / 6);
     const ballByBallRuns = [...stats.ballByBallRuns];
     stats.overs = completedOvers + ((stats.balls % 6) / 10);
     stats.maidens = getMaidens(completedOvers, ballByBallRuns);
-        return stats;
+    return stats;
   });
 }
 
@@ -45,16 +45,16 @@ const getBowlersAggregateStats = (balls) => {
   if (balls === undefined) {
     return [];
   }
-    const aggregateStats = balls.reduce((accumulator, ball) => {
+  const aggregateStats = balls.reduce((accumulator, ball) => {
     const bowlerName = ball.bowler;
-        const stats = accumulator;
-        if (bowlerName in stats) {
-            stats[bowlerName] = updateBowlerStats(stats[bowlerName], ball);
+    const stats = accumulator;
+    if (bowlerName in stats) {
+      stats[bowlerName] = updateBowlerStats(stats[bowlerName], ball);
     } else {
-            stats[bowlerName] = initialBowlerStatsObject(ball);
+      stats[bowlerName] = initialBowlerStatsObject(ball);
     }
-        return stats;
-    }, {});
+    return stats;
+  }, {});
 
   return updateOverAndMaidens(aggregateStats);
 };
