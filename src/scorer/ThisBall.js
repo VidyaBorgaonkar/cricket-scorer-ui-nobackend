@@ -5,7 +5,7 @@ import {selectBatsman, selectRunsScored, updateScore} from "./scoreActions";
 
 
 const createRunsButton = (props, score) =>
-    <Button color="primary" className="mx-2 my-1 px-3 rounded"
+    <Button color="primary" className="mx-1 my-1 px-3 rounded"
             style={{flexBasis: 40, flexShrink: 0, flexGrow: 0, width: 40}} outline
             onClick={() => props.selectRunsScored(score)} active={props.selectedRuns === score}>{score}</Button>
 
@@ -47,14 +47,14 @@ const ThisBall = (props) =>
         </Row>
         <br/>
         <Row>
-            <Col md={{size: 6, offset: 3}} sm="12">
+            <Col md={{size: 6, offset: 3}}  className="text-center">
                 <RunsToolBar selectedRuns={props.selectedRuns} selectRunsScored={props.selectRunsScored}/>
             </Col>
         </Row>
         <br/>
         <Row>
-            <Col md={{size: 6, offset: 3}}>
-                <Button onClick={() => props.onNextBall(props)}>Next Ball</Button>
+            <Col className="text-center">
+                <Button color="primary" onClick={() => props.onNextBall(props)}>Next Ball</Button>
             </Col>
         </Row>
     </Container>;
