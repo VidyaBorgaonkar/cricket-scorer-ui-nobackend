@@ -8,6 +8,7 @@ describe('currentBallReducerOnLoad', () => {
       batsman: '',
       extras: [],
       runs: -1,
+      wicket: false,
     };
 
 
@@ -27,6 +28,7 @@ describe('currentBallReducerOnNewBallAction', () => {
       batsman: '',
       extras: [],
       runs: -1,
+      wicket: false,
     };
 
 
