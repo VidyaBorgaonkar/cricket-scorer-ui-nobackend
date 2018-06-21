@@ -1,4 +1,4 @@
-import { NEXT_BALL, SELECT_BATSMAN, SELECT_RUNS_SCORED, SELECT_EXTRA, WICKET } from '../store/actionConstants';
+import { NEXT_BALL, SELECT_BATSMAN, SELECT_RUNS_SCORED, SELECT_EXTRA, WICKET, NEXT_OVER } from '../store/actionConstants';
 
 export const updateScore = (data) => {
   const payload = {
@@ -9,9 +9,21 @@ export const updateScore = (data) => {
     wicket: data.wicket,
     currentOver: Math.floor(data.over),
   };
-  return {
-    type: NEXT_BALL,
-    payload,
+  return (dispatch, getState) => {
+    dispatch({
+      type: NEXT_BALL,
+      payload,
+    });
+
+
+    const stateAfterNextBall = getState();
+
+    if (stateAfterNextBall.currentOverDetails.ballsRemaining === 0) {
+      dispatch({
+        type: NEXT_OVER,
+        currentOver: payload.currentOver,
+      });
+    }
   };
 };
 

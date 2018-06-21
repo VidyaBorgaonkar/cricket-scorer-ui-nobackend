@@ -1,4 +1,4 @@
-import { NEXT_BALL } from '../store/actionConstants';
+import { NEXT_BALL, NEXT_OVER } from '../store/actionConstants';
 
 export const initialState = { overDetails: [], ballsRemaining: 6 };
 
@@ -21,9 +21,11 @@ const updateCurrentOver = (state = initialState, action) => {
       if (extras.indexOf('W') === -1 && extras.indexOf('N') === -1) {
         ballsRemaining -= 1;
       }
-      if (ballsRemaining <= 0) return initialState;
 
       return { overDetails: [...state.overDetails, currentBallDetails], ballsRemaining };
+    }
+    case NEXT_OVER: {
+      return initialState;
     }
     default:
       return state;

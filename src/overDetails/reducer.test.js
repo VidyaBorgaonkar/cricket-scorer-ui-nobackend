@@ -1,5 +1,5 @@
 import reducer from './reducer';
-import { NEXT_BALL } from '../store/actionConstants';
+import { NEXT_BALL, NEXT_OVER } from '../store/actionConstants';
 
 
 const updateScore = (runs = 0, extras = [], isOut = false) => ({
@@ -55,6 +55,7 @@ describe('gameInformation/reducer', () => {
     state = reducer(state, updateScore(1));
     state = reducer(state, updateScore(1));
     state = reducer(state, updateScore(1));
+    state = reducer(state, { type: NEXT_OVER, currentOver: 0 });
 
     expect(state).toEqual(initialState);
   });
