@@ -70,7 +70,7 @@ const OutButton = props => (
       color="primary"
       outline
       onClick={() => props.onOutBtnClick()}
-      active={props.wicketStatus === true}
+      active={props.wicket === true}
     >
                     Out
     </Button>
@@ -78,7 +78,7 @@ const OutButton = props => (
 
 OutButton.propTypes = {
   onOutBtnClick: PropTypes.string.isRequired,
-  wicketStatus: PropTypes.bool.isRequired,
+  wicket: PropTypes.bool.isRequired,
 };
 
 const ThisBall = props => (
@@ -108,7 +108,7 @@ const ThisBall = props => (
     <br />
     <Row>
       <Col md={{ size: 6, offset: 3 }} className="text-center">
-        <OutButton wicketStatus={props.wicketStatus} onOutBtnClick={props.onOutBtnClick} />
+        <OutButton wicket={props.wicket} onOutBtnClick={props.onOutBtnClick} />
       </Col>
     </Row>
     <br />
@@ -123,7 +123,7 @@ ThisBall.propTypes = {
   batsmen: PropTypes.string.isRequired,
   selectedBatsman: PropTypes.string.isRequired,
   selectedRuns: PropTypes.number.isRequired,
-  wicketStatus: PropTypes.bool.isRequired,
+  wicket: PropTypes.bool.isRequired,
   selectRunsScored: PropTypes.func.isRequired,
   selectBatsman: PropTypes.func.isRequired,
   onNextBall: PropTypes.func.isRequired,
@@ -137,7 +137,7 @@ const mapStateToProps = state => ({
   selectedBatsman: state.currentBall.batsman,
   selectedRuns: state.currentBall.runs,
   extras: state.currentBall.extras,
-  wicketStatus: state.currentBall.wicket,
+  wicket: state.currentBall.wicket,
 });
 
 const mapDispatchToProps = dispatch => ({
