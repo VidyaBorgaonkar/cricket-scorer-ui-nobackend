@@ -146,7 +146,7 @@ const mapDispatchToProps = dispatch => ({
   selectRunsScored: runsScored => dispatch(selectRunsScored(runsScored)),
   onOutBtnClick: () => dispatch(wicketTaken()),
   onNextBall: (currentBall) => {
-    if (currentBall.selectedBatsman !== '' && currentBall.selectedRuns !== -1) {
+    if ((currentBall.selectedBatsman !== '' && (currentBall.selectedRuns !== undefined || currentBall.wicket))) {
       dispatch(updateScore(currentBall));
     }
   },

@@ -4,7 +4,7 @@ export const updateScore = (data) => {
   const payload = {
     batsman: data.selectedBatsman,
     bowler: data.bowler,
-    runs: data.selectedRuns,
+    runs: data.selectedRuns === undefined ? 0 : data.selectedRuns,
     extras: data.extras,
     wicket: data.wicket,
     currentOver: Math.floor(data.over),

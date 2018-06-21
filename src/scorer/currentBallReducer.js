@@ -2,7 +2,7 @@ import { NEXT_BALL, SELECT_BATSMAN, SELECT_RUNS_SCORED, WICKET, SELECT_EXTRA } f
 
 const initialcurrentBall = {
   batsman: '',
-  runs: -1,
+  runs: undefined,
   extras: [],
   wicket: false,
 };
