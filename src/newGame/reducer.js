@@ -1,4 +1,4 @@
-import { UPDATE_PLAYER_NAME, UPDATE_TEAM_NAME } from '../store/actionConstants';
+import { UPDATE_PLAYER_NAME, UPDATE_MAX_OVERS, UPDATE_TEAM_NAME } from '../store/actionConstants';
 
 const initialState = {
   team1: ['Player1.1',
@@ -46,6 +46,12 @@ const reducer = (state = initialState, action) => {
       };
     }
 
+    case UPDATE_MAX_OVERS: {
+      return {
+        ...state,
+        numberOfOvers: action.maxOvers,
+      };
+    }
     default: return state;
   }
 };
