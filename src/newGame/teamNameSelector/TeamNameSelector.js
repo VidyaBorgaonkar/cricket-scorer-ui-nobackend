@@ -53,17 +53,19 @@ TeamNameSelector.defaultProps = {
   teamName: '',
 };
 
-const
-  mapStateToProps = (state, props) => ({
-    teamName: state.gameInformation.names[props.teamIndex],
-  });
+const mapStateToProps = (state, props) => ({
+  teamName: state.gameInformation.names[props.teamIndex],
+});
 
-const
-  mapDispatchToProps = dispatch => ({
-    updateTeamName: (index, teamName) => {
-      dispatch({ type: UPDATE_TEAM_NAME, index, teamName });
-    },
-  });
+export function updateTeamNameAction(index, teamName) {
+  return { type: UPDATE_TEAM_NAME, index, teamName };
+}
+
+const mapDispatchToProps = dispatch => ({
+  updateTeamName: (index, teamName) => {
+    dispatch(updateTeamNameAction(index, teamName));
+  },
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(TeamNameSelector);
 
