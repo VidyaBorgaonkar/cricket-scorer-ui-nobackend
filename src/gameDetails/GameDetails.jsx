@@ -7,7 +7,7 @@ import BatsmenStats from './BatsmenStats';
 
 const GameDetails = () => (
   <Container className="h-100">
-    <Row className="h-100">
+    <Row>
       <ScoreBoard />
       <BatsmenStats />
       <BowlingStats />

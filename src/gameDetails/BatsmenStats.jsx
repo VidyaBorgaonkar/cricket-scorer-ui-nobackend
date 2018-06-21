@@ -16,7 +16,7 @@ const addRow = (stats, index) => (
 );
 
 const BatsmenStats = props => (
-  <Container>
+  <Container className="mt-4">
     <Row>
       <Col md={{ size: 6, offset: 3 }}>Batting Table</Col>
       <Col md={{ size: 6, offset: 3 }}>
@@ -47,7 +47,7 @@ BatsmenStats.propTypes = {
     totalBalls: PropTypes.number.isRequired,
     fours: PropTypes.number.isRequired,
     sixes: PropTypes.number.isRequired,
-    strikeRate: PropTypes.arrayOf(PropTypes.number).isRequired,
+    strikeRate: PropTypes.number.isRequired,
   })).isRequired,
 };
 
