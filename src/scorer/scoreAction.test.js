@@ -1,4 +1,4 @@
-import { updateScore, selectBatsman, selectRunsScored } from './scoreActions';
+import { selectBatsman, selectRunsScored } from './scoreActions';
 
 describe('[Select Batsman Actions]', () => {
   it('Test Select Batsman Action', () => {
