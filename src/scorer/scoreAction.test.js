@@ -80,7 +80,8 @@ describe('[Select Next Ball Actions]', () => {
     const actionFn = updateScore(data);
 
     const mockDispatch = jest.fn();
-    const mockGetState = () => ({ currentOverDetails: { ballsRemaining: 0 } });
+    const mockGetState = () =>
+      ({ currentOverDetails: { ballsRemaining: 0 }, gameInformation: { numberOfOvers: 1 } });
 
     actionFn(mockDispatch, mockGetState);
     expect(mockDispatch.mock.calls.length).toBe(2);
@@ -98,6 +99,7 @@ describe('[Select Next Ball Actions]', () => {
     expect(mockDispatch.mock.calls[1][0]).toEqual({
       type: 'NEXT_OVER',
       currentOver: 1,
+      totalNoOfOvers: 1,
     });
   });
 });
