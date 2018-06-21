@@ -137,7 +137,8 @@ const mapStateToProps = state => ({
   selectedBatsman: state.currentBall.batsman,
   selectedRuns: state.currentBall.runs,
   extras: state.currentBall.extras,
-  wicketStatus: state.currentBall.wicket,
+  wicket: state.currentBall.wicket,
+  over: state.scoreInformation.scoreboard[state.scoreInformation.currentTeamIndex].overs,
 });
 
 const mapDispatchToProps = dispatch => ({

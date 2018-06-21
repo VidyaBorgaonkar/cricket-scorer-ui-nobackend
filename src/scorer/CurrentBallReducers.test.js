@@ -1,5 +1,5 @@
 import updateCurrentBall from './currentBallReducer';
-import { NEXT_BALL, SELECT_BATSMAN, SELECT_RUNS_SCORED } from '../store/actionConstants';
+import { NEXT_BALL, SELECT_BATSMAN, SELECT_RUNS_SCORED, WICKET } from '../store/actionConstants';
 
 describe('currentBallReducerOnLoad', () => {
   it('should return initial state when loading DOM ', () => {
@@ -22,7 +22,9 @@ describe('currentBallReducerOnNewBallAction', () => {
     const state = {};
     const action = {
       type: NEXT_BALL,
-      payload: { batsman: 'name', runs: 6, bowler: 'name2' },
+      payload: {
+        batsman: 'name', runs: 6, bowler: 'name2', wicket: false,
+      },
     };
     const newState = {
       batsman: '',
@@ -65,6 +67,40 @@ describe('currentBallReducerOnSelectRunsScoredAction', () => {
     const newState = {
       batsman: 'player1',
       runs: 6,
+    };
+
+
+    expect(updateCurrentBall(state, action)).toEqual(newState);
+  });
+});
+
+describe('currentBallReducerOnWicketAction', () => {
+  it('should return toggled wicketStatus on wicket Action', () => {
+    const state = { batsman: 'player1', runs: 2, wicket: false };
+    const action = {
+      type: WICKET,
+    };
+    const newState = {
+      batsman: 'player1',
+      runs: 2,
+      wicket: true,
+    };
+
+
+    expect(updateCurrentBall(state, action)).toEqual(newState);
+  });
+});
+
+describe('currentBallReducerOnWicketActionAgain', () => {
+  it('should return toggled wicketStatus on wicket Action', () => {
+    const state = { batsman: 'player1', runs: 5, wicket: true };
+    const action = {
+      type: WICKET,
+    };
+    const newState = {
+      batsman: 'player1',
+      runs: 5,
+      wicket: false,
     };
 
 
