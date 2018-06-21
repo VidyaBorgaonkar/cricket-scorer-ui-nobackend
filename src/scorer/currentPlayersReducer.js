@@ -1,4 +1,4 @@
-import {NEXT_BALL, NEXT_OVER, PLAY_NEXT_BATSMAN, SELECT_BOWLER} from '../store/actionConstants';
+import { NEXT_BALL, NEXT_OVER, PLAY_NEXT_BATSMAN, SELECT_BOWLER } from '../store/actionConstants';
 
 const initialcurrentPlayers = {
   batsmen: ['Player1.1', 'Player1.2'],
@@ -17,12 +17,12 @@ const updateCurrentPlayers = (state = initialcurrentPlayers, action) => {
     case PLAY_NEXT_BATSMAN:
       return { ...state, batsmen: [...state.batsmen, action.payload] };
 
-      case NEXT_OVER: {
-          return { ...state, bowler: undefined };
-      }
-      case SELECT_BOWLER: {
-          return { ...state, bowler: action.bowlerName };
-      }
+    case NEXT_OVER: {
+      return { ...state, bowler: undefined };
+    }
+    case SELECT_BOWLER: {
+      return { ...state, bowler: action.bowlerName };
+    }
     default:
       return state;
   }
