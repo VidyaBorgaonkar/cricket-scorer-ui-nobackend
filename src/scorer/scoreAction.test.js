@@ -1,5 +1,5 @@
 
-import { selectBatsman, selectRunsScored, wicketTaken, playNextBatsman } from './scoreActions';
+import { selectBatsman, selectRunsScored, wicketTaken, playNextBatsman, updateScore } from './scoreActions';
 
 
 describe('[Select Batsman Actions]', () => {
@@ -41,24 +41,63 @@ describe('[Play Next Batsman  Actions]', () => {
   });
 });
 
-// TODO fix later
-// describe('[Select Next Ball Actions]', () => {
-//   it('Test Next Ball Action', () => {
-//     const data = {
-//       batsmen: ['player1', 'player2'],
-//       bowler: 'player3',
-//       selectedBatsman: 'player2',
-//       selectedRuns: 5,
-//     };
-//     const action = updateScore(data);
-//
-//     //action(jest.mock())
-//
-//     expect(action.type).toEqual('NEXT_BALL');
-//     expect(action.payload).toEqual({
-//       batsman: 'player2',
-//       bowler: 'player3',
-//       runs: 5,
-//     });
-//   });
-// });
+describe('[Select Next Ball Actions]', () => {
+  it('Test Next Ball Action', () => {
+    const data = {
+      batsmen: ['player1', 'player2'],
+      bowler: 'player3',
+      selectedBatsman: 'player2',
+      selectedRuns: 5,
+      over: 1.1,
+    };
+    const actionFn = updateScore(data);
+
+    const mockDispatch = jest.fn();
+    const mockGetState = () => ({ currentOverDetails: { ballsRemaining: 6 } });
+
+    actionFn(mockDispatch, mockGetState);
+    expect(mockDispatch.mock.calls.length).toBe(1);
+
+    expect(mockDispatch.mock.calls[0][0]).toEqual({
+      type: 'NEXT_BALL',
+      payload: {
+        batsman: 'player2',
+        bowler: 'player3',
+        runs: 5,
+        currentOver: 1,
+      },
+    });
+  });
+
+  it('Next ball action should dispatch a NEXT_OVER action when ballsRemaining in currentOver reaches 0', () => {
+    const data = {
+      batsmen: ['player1', 'player2'],
+      bowler: 'player3',
+      selectedBatsman: 'player2',
+      selectedRuns: 5,
+      over: 1.1,
+    };
+    const actionFn = updateScore(data);
+
+    const mockDispatch = jest.fn();
+    const mockGetState = () => ({ currentOverDetails: { ballsRemaining: 0 } });
+
+    actionFn(mockDispatch, mockGetState);
+    expect(mockDispatch.mock.calls.length).toBe(2);
+
+    expect(mockDispatch.mock.calls[0][0]).toEqual({
+      type: 'NEXT_BALL',
+      payload: {
+        batsman: 'player2',
+        bowler: 'player3',
+        runs: 5,
+        currentOver: 1,
+      },
+    });
+
+    expect(mockDispatch.mock.calls[1][0]).toEqual({
+      type: 'NEXT_OVER',
+      currentOver: 1,
+    });
+  });
+});
