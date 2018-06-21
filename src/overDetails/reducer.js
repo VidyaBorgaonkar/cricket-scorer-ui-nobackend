@@ -21,7 +21,7 @@ const updateCurrentOver = (state = initialState, action) => {
       if (wicket) {
         currentBallDetails += '(W)';
       }
-      if (extras.indexOf('W') === -1 && extras.indexOf('N') === -1) {
+      if (!extras.includes('W') && !extras.includes('N')) {
         ballsRemaining -= 1;
       }
 

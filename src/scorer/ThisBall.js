@@ -21,7 +21,7 @@ const createRunsButton = (props, score) => (
 
 createRunsButton.propTypes = {
   selectedRuns: PropTypes.number.isRequired,
-  selectRunsScored: PropTypes.number.isRequired,
+  selectRunsScored: PropTypes.func.isRequired,
 };
 
 
@@ -58,9 +58,9 @@ const BatsmenToolBar = props => (
   </ButtonGroup>);
 
 BatsmenToolBar.propTypes = {
-  batsmen: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+  batsmen: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   selectedBatsman: PropTypes.string.isRequired,
-  selectBatsman: PropTypes.string.isRequired,
+  selectBatsman: PropTypes.func.isRequired,
 
 };
 
@@ -77,8 +77,12 @@ const OutButton = props => (
   </ButtonGroup>);
 
 OutButton.propTypes = {
-  onOutBtnClick: PropTypes.string.isRequired,
-  wicketStatus: PropTypes.bool.isRequired,
+  onOutBtnClick: PropTypes.func.isRequired,
+  wicketStatus: PropTypes.bool,
+};
+
+OutButton.defaultProps = {
+  wicketStatus: false,
 };
 
 const ThisBall = props => (
@@ -120,14 +124,19 @@ const ThisBall = props => (
   </Container>);
 
 ThisBall.propTypes = {
-  batsmen: PropTypes.string.isRequired,
+  batsmen: PropTypes.arrayOf(PropTypes.string).isRequired,
   selectedBatsman: PropTypes.string.isRequired,
-  selectedRuns: PropTypes.number.isRequired,
-  wicketStatus: PropTypes.bool.isRequired,
+  selectedRuns: PropTypes.number,
+  wicketStatus: PropTypes.bool,
   selectRunsScored: PropTypes.func.isRequired,
   selectBatsman: PropTypes.func.isRequired,
   onNextBall: PropTypes.func.isRequired,
   onOutBtnClick: PropTypes.func.isRequired,
+};
+
+ThisBall.defaultProps = {
+  selectedRuns: undefined,
+  wicketStatus: undefined,
 };
 
 
@@ -146,7 +155,7 @@ const mapDispatchToProps = dispatch => ({
   selectRunsScored: runsScored => dispatch(selectRunsScored(runsScored)),
   onOutBtnClick: () => dispatch(wicketTaken()),
   onNextBall: (currentBall) => {
-    if (currentBall.selectedBatsman !== '' && currentBall.selectedRuns !== -1) {
+    if ((currentBall.selectedBatsman !== '' && (currentBall.selectedRuns !== undefined || currentBall.wicket))) {
       dispatch(updateScore(currentBall));
     }
   },

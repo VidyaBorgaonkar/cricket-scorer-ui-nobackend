@@ -71,6 +71,6 @@ export default connect(mapToProps)(ScoreBoard);
 
 ScoreBoard.propTypes = {
   currentTeamIndex: PropTypes.number.isRequired,
-  scoreboard: PropTypes.arrayOf(PropTypes.objectOf()).isRequired,
+  scoreboard: PropTypes.arrayOf(PropTypes.object).isRequired,
   totalNoOfOvers: PropTypes.number.isRequired,
 };

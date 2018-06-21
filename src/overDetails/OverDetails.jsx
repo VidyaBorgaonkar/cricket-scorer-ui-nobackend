@@ -12,7 +12,13 @@ const OverDetails = props => (
                             This Over
           </Col>
           <Col xs="8" className="px-5">
-            {props.currentOverDetails.overDetails.map(ball => <span className="mr-3">{ball}</span>)}
+            {
+                props.currentOverDetails.overDetails
+                    .map((ballRepresentation, index) => {
+                      const key = `${ballRepresentation}-${index}`;
+                      return <span key={key} className="mr-3">{ballRepresentation}</span>;
+                    })
+            }
           </Col>
         </Row>
       </Col>
@@ -38,6 +44,9 @@ const mapToProps = state => ({
 export default connect(mapToProps)(OverDetails);
 
 OverDetails.propTypes = {
-  currentOverDetails: PropTypes.objectOf().isRequired,
+  currentOverDetails: PropTypes.shape({
+    overDetails: PropTypes.arrayOf(PropTypes.string).required,
+    ballsRemaining: PropTypes.number.required,
+  }).isRequired,
   bowler: PropTypes.string.isRequired,
 };

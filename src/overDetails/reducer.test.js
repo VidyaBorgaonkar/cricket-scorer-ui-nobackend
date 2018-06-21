@@ -2,10 +2,10 @@ import reducer from './reducer';
 import { NEXT_BALL, NEXT_OVER } from '../store/actionConstants';
 
 
-const updateScore = (runs = 0, extras = [], isOut = false) => ({
+const updateScore = (runs = 0, extras = [], wicket = false) => ({
   type: NEXT_BALL,
   payload: {
-    runs, extras, isOut,
+    runs, extras, wicket,
   },
 });
 
