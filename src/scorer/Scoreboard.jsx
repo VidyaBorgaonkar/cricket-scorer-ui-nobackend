@@ -16,7 +16,7 @@ const ScoreBoard = (props = initialScoreBoard) => {
         <Col md={{ size: 6, offset: 3 }}>
           <Row>
             <Col md="5" xs="4">
-              <b>Team 1</b><br />
+              <b>Team {props.currentTeamIndex + 1}</b><br />
             </Col>
             <Col sm="1" xs="2" />
             <Col style={{ textAlign: 'right' }}>
@@ -35,12 +35,12 @@ const ScoreBoard = (props = initialScoreBoard) => {
           <Col md={{ size: 6, offset: 3 }} sm="12">
             <Row>
               <Col>
-                                Team 2 scored
+                   Team {otherTeamIndex + 1} scored
               </Col>
               <Col style={{ textAlign: 'right' }}>
                 {props.scoreboard[otherTeamIndex].total}/
                 {props.scoreboard[otherTeamIndex].wickets} in
-                &nbsp;{props.scoreboard[otherTeamIndex].overs}.toFixed(1)/
+                &nbsp;{props.scoreboard[otherTeamIndex].overs.toFixed(1)}/
                 {props.totalNoOfOvers}
               </Col>
             </Row>
@@ -50,7 +50,7 @@ const ScoreBoard = (props = initialScoreBoard) => {
         <Row>
           <Col md={{ size: 6, offset: 3 }} sm="12">
             <Row>
-              <Col>Team 2 yet to play</Col>
+              <Col>Team {otherTeamIndex + 1} yet to play</Col>
             </Row>
           </Col>
         </Row>
@@ -59,13 +59,14 @@ const ScoreBoard = (props = initialScoreBoard) => {
     </Container>);
 };
 
-const mapToProps = state => ({
-  currentTeamIndex: state.scoreInformation.currentTeamIndex,
-  scoreboard: state.scoreInformation.scoreboard,
-  totalNoOfOvers: state.gameInformation.numberOfOvers,
-  oversPlayed: state.currentOverDetails.totalOvers,
-});
-
+const mapToProps = (state) => {
+  console.log('total no of overs', state.gameInformation.numberOfOvers);
+  return {
+    currentTeamIndex: state.scoreInformation.currentTeamIndex,
+    scoreboard: state.scoreInformation.scoreboard,
+    totalNoOfOvers: state.gameInformation.numberOfOvers,
+  };
+};
 export default connect(mapToProps)(ScoreBoard);
 
 ScoreBoard.propTypes = {

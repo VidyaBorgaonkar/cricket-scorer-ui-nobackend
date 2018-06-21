@@ -1,4 +1,5 @@
-import { NEXT_BALL } from '../store/actionConstants';
+import { NEXT_BALL, NEXT_OVER } from '../store/actionConstants';
+import { convertBallsToOvers } from '../utilis';
 
 export const initialScoreBoard = {
   currentTeamIndex: 0,
@@ -34,7 +35,7 @@ const updateScoreboard = (state = initialScoreBoard, action) => {
       }
 
       const totalBalls = currentTeam.totalBalls + 1;
-      const overs = Math.floor(totalBalls / 6) + ((totalBalls % 6) / 10);
+      const overs = convertBallsToOvers(totalBalls);
 
       scoreboard[currentTeamIndex] = {// TODO fix later
         ...currentTeam,
@@ -49,6 +50,13 @@ const updateScoreboard = (state = initialScoreBoard, action) => {
         ...state,
         scoreboard: [...scoreboard],
       };
+    }
+    case NEXT_OVER: {
+      if (action.currentOver + 1 === action.totalNoOfOvers) {
+        const currentTeamIndex = state.currentTeamIndex === 0 ? 1 : 0;
+        return { ...state, currentTeamIndex };
+      }
+      return state;
     }
     default:
       return state;

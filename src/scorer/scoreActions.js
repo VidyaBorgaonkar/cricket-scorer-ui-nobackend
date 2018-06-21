@@ -15,13 +15,12 @@ export const updateScore = (data) => {
       payload,
     });
 
-
     const stateAfterNextBall = getState();
-
     if (stateAfterNextBall.currentOverDetails.ballsRemaining === 0) {
       dispatch({
         type: NEXT_OVER,
         currentOver: payload.currentOver,
+        totalNoOfOvers: stateAfterNextBall.gameInformation.numberOfOvers,
       });
     }
   };
