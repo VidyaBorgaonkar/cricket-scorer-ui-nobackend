@@ -1,5 +1,5 @@
 
-import { updateScore, selectBatsman, selectRunsScored, wicketTaken, playNextBatsman } from './scoreActions';
+import { selectBatsman, selectRunsScored, wicketTaken, playNextBatsman } from './scoreActions';
 
 
 describe('[Select Batsman Actions]', () => {
