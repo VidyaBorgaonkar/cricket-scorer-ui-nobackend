@@ -78,7 +78,11 @@ const OutButton = props => (
 
 OutButton.propTypes = {
   onOutBtnClick: PropTypes.func.isRequired,
-  wicketStatus: PropTypes.bool.isRequired,
+  wicketStatus: PropTypes.bool,
+};
+
+OutButton.defaultProps = {
+  wicketStatus: false,
 };
 
 const ThisBall = props => (
@@ -122,12 +126,17 @@ const ThisBall = props => (
 ThisBall.propTypes = {
   batsmen: PropTypes.arrayOf(PropTypes.string).isRequired,
   selectedBatsman: PropTypes.string.isRequired,
-  selectedRuns: PropTypes.number.isRequired,
-  wicketStatus: PropTypes.bool.isRequired,
+  selectedRuns: PropTypes.number,
+  wicketStatus: PropTypes.bool,
   selectRunsScored: PropTypes.func.isRequired,
   selectBatsman: PropTypes.func.isRequired,
   onNextBall: PropTypes.func.isRequired,
   onOutBtnClick: PropTypes.func.isRequired,
+};
+
+ThisBall.defaultProps = {
+  selectedRuns: undefined,
+  wicketStatus: undefined,
 };
 
 

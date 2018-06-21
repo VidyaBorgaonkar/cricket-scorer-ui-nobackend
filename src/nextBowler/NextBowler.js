@@ -14,6 +14,7 @@ import {
 import { connect } from 'react-redux';
 import setBowler from './actions';
 
+const INITIAL_SELECT_TEXT = 'Select';
 
 class NextBowlerModal extends React.Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class NextBowlerModal extends React.Component {
 
     this.state = {
       dropdownOpen: false,
-      bowlerSelected: 'Select',
+      bowlerSelected: INITIAL_SELECT_TEXT,
     };
   }
 
@@ -46,8 +47,18 @@ class NextBowlerModal extends React.Component {
 
     if (!balls || !balls.length) return allBowlers;
 
-    const lastBallInfo = balls[balls.length - 2];
+    const lastBallInfo = balls[balls.length - 1];
     return allBowlers.filter(name => name !== lastBallInfo.bowler);
+  }
+
+  renderBowlerDropDown(bowlersOtherThanLast) {
+    return bowlersOtherThanLast.map((name, index) => {
+      const key = `${name}-${index}`;
+      return (
+        <DropdownItem key={key} onClick={this.onClick}>
+          {name}
+        </DropdownItem>);
+    });
   }
 
   render() {
@@ -64,16 +75,18 @@ class NextBowlerModal extends React.Component {
               </DropdownToggle>
               <DropdownMenu>
                 <DropdownItem header>Select Bowler</DropdownItem>
-                {bowlersOtherThanLast.map(name => (
-                  <DropdownItem
-                    onClick={this.onClick}
-                  >{name}
-                  </DropdownItem>))}
+                {this.renderBowlerDropDown(bowlersOtherThanLast)}
               </DropdownMenu>
             </ButtonDropdown>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={() => { this.props.setBowler(this.state.bowlerSelected); this.state.bowlerSelected = 'Select'; }}>
+            <Button
+              color="primary"
+              onClick={() => {
+                                this.props.setBowler(this.state.bowlerSelected);
+                                this.setState({ bowlerSelected: INITIAL_SELECT_TEXT });
+                            }}
+            >
               {"Let's continue playing"}
             </Button>{' '}
           </ModalFooter>
@@ -110,7 +123,10 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  setBowler: bowlerName => dispatch(setBowler(bowlerName)),
+  setBowler: (bowlerName) => {
+    if (bowlerName === INITIAL_SELECT_TEXT) return;
+    dispatch(setBowler(bowlerName));
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NextBowlerModal);
