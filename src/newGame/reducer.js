@@ -1,3 +1,5 @@
+import { UPDATE_TEAM_NAME } from '../store/actionConstants';
+
 const initialState = {
   team1: ['Player1.1',
     'Player1.2',
@@ -22,8 +24,19 @@ const initialState = {
     'Player2.10',
     'Player2.11'],
   numberOfOvers: 5,
+  names: ['team1', 'team2'],
 };
 
-const reducer = (state = initialState) => state;
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case UPDATE_TEAM_NAME: {
+      return {
+        ...state,
+        names: Object.assign([...state.names], { [action.index]: action.teamName }),
+      };
+    }
+    default: return state;
+  }
+};
 
 export default reducer;

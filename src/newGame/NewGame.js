@@ -1,8 +1,11 @@
 import React from 'react';
 
+import TeamNameSelector from './teamNameSelector/TeamNameSelector';
+
 const NewGame = () => (
   <div>
-    This is the page where the New Game Details have to be entered
+    <TeamNameSelector teamIndex={0} />
+    <TeamNameSelector teamIndex={1} />
   </div>
 );
 
