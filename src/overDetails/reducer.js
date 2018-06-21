@@ -1,4 +1,5 @@
 import { NEXT_BALL, NEXT_OVER } from '../store/actionConstants';
+import { isCorrectBall } from '../utilis';
 
 export const initialState = { overDetails: [], ballsRemaining: 6 };
 
@@ -21,7 +22,7 @@ const updateCurrentOver = (state = initialState, action) => {
       if (wicket) {
         currentBallDetails += '(W)';
       }
-      if (!extras.includes('W') && !extras.includes('N')) {
+      if (isCorrectBall(extras)) {
         ballsRemaining -= 1;
       }
 

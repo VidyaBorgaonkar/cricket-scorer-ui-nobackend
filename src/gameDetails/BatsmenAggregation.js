@@ -1,3 +1,5 @@
+import { isCorrectBall } from '../utilis';
+
 const getFoursCount = runs => (runs === 4 ? 1 : 0);
 
 const getSixesCount = runs => (runs === 6 ? 1 : 0);
@@ -5,7 +7,7 @@ const getSixesCount = runs => (runs === 6 ? 1 : 0);
 const getStrikeRate = (totalNoOfRuns, totalBalls) =>
   (totalBalls > 0 ? parseFloat(((totalNoOfRuns * 100) / totalBalls).toFixed(2)) : 0);
 
-const getBatsmenBallCount = extras => (extras.includes('W') || extras.includes('N') ? 0 : 1);
+const getBatsmenBallCount = extras => (isCorrectBall(extras) ? 1 : 0);
 
 const getBatsmenRuns = (extras, runs) => (extras.length === 0 ? runs : 0);
 
@@ -61,7 +63,7 @@ const getBatsmenStatsArray = (batsmenStats, currentPlayer) => {
 };
 
 const getBatsmenAggregateStats = (balls, currentPlayer) => {
-  if (balls === undefined) {
+  if (balls === undefined || balls.length === 0) {
     return [];
   }
   const batsmenStats = balls.reverse().reduce((accumulator, ball) => {

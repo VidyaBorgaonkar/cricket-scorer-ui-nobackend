@@ -60,7 +60,6 @@ const ScoreBoard = (props = initialScoreBoard) => {
 };
 
 const mapToProps = (state) => {
-  console.log('total no of overs', state.gameInformation.numberOfOvers);
   return {
     currentTeamIndex: state.scoreInformation.currentTeamIndex,
     scoreboard: state.scoreInformation.scoreboard,

@@ -1,3 +1,5 @@
+import { convertBallsToOvers } from '../utilis';
+
 function updateBowlerStats(bowlerStats, ball) {
   return {
     ...bowlerStats,
@@ -20,9 +22,9 @@ function initialBowlerStatsObject(ball) {
   };
 }
 
-function getMaidens(completedOvers, ballByBallRuns) {
+function getMaidens(ballByBallRuns) {
   let noOfMaidens = 0;
-  for (let i = 0; i < completedOvers; i += 1) {
+  for (let i = 0; i < Math.floor(ballByBallRuns.length / 6); i += 1) {
     const totalNumberOfRuns = ballByBallRuns.splice(0, 6).reduce((acc, val) => acc + val);
     if (totalNumberOfRuns === 0) {
       noOfMaidens += 1;
@@ -34,10 +36,9 @@ function getMaidens(completedOvers, ballByBallRuns) {
 function updateOverAndMaidens(aggregateStats) {
   return Object.keys(aggregateStats).map((key) => {
     const stats = aggregateStats[key];
-    const completedOvers = Math.floor(stats.balls / 6);
     const ballByBallRuns = [...stats.ballByBallRuns];
-    stats.overs = completedOvers + ((stats.balls % 6) / 10);
-    stats.maidens = getMaidens(completedOvers, ballByBallRuns);
+    stats.overs = convertBallsToOvers(stats.balls);
+    stats.maidens = getMaidens(ballByBallRuns);
     return stats;
   });
 }

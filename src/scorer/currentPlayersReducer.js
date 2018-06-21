@@ -1,11 +1,11 @@
 import { NEXT_BALL, NEXT_OVER, PLAY_NEXT_BATSMAN, SELECT_BOWLER } from '../store/actionConstants';
 
-const initialcurrentPlayers = {
+export const initialCurrentPlayers = {
   batsmen: ['Player1.1', 'Player1.2'],
   bowler: 'Player2.1',
 };
 
-const updateCurrentPlayers = (state = initialcurrentPlayers, action) => {
+const updateCurrentPlayers = (state = initialCurrentPlayers, action) => {
   switch (action.type) {
     case NEXT_BALL: {
       const data = action.payload;

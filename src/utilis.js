@@ -3,5 +3,8 @@ const convertBallsToOvers = (noOfBalls) => {
   return completedOvers + ((noOfBalls % 6) / 10);
 };
 
+const isCorrectBall = extras =>
+  !extras.includes('W') && !extras.includes('N');
 
-export { convertBallsToOvers };
+
+export { convertBallsToOvers, isCorrectBall };
