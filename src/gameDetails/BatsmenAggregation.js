@@ -9,8 +9,8 @@ const getBatsmenBallCount = extras => (extras.includes('W') || extras.includes('
 
 const getBatsmenRuns = (extras, runs) => (extras.length === 0 ? runs : 0);
 
-const initialBatsmanStats = (batsman, runs, extras) => ({
-  name: `${batsman}*`,
+const initialBatsmanStats = (batsman, runs, extras, wicket) => ({
+  name: wicket ? batsman : `${batsman}*`,
   runs: getBatsmenRuns(extras, runs),
   totalBalls: getBatsmenBallCount(extras),
   fours: getFoursCount(runs),
@@ -36,11 +36,35 @@ const updateBatsmanStats = (stats, batsman, runs, wicket, extras) => {
   };
 };
 
-const getBatsmenAggregateStats = (balls) => {
+const notEqualToCurrentBatsmen =
+  currentPlayer => batsmanName =>
+    !(currentPlayer[0] === batsmanName || currentPlayer[1] === batsmanName);
+
+
+const getBatsmenStatsArray = (batsmenStats, currentPlayer) => {
+  let player1 = initialBatsmanStats(currentPlayer[0], 0, [], 0);
+  let player2 = initialBatsmanStats(currentPlayer[1], 0, [], 0);
+  player1.totalBalls = 0;
+  player2.totalBalls = 0;
+
+  if (batsmenStats === undefined || Object.keys(batsmenStats).length === 0) {
+    return [player1, player2];
+  }
+
+  player1 = batsmenStats[currentPlayer[0]] !== undefined ? batsmenStats[currentPlayer[0]] : player1;
+  player2 = batsmenStats[currentPlayer[1]] !== undefined ? batsmenStats[currentPlayer[1]] : player2;
+
+  return [player1, player2,
+    ...Object.keys(batsmenStats)
+      .filter(notEqualToCurrentBatsmen(currentPlayer))
+      .map(batsmanName => batsmenStats[batsmanName])];
+};
+
+const getBatsmenAggregateStats = (balls, currentPlayer) => {
   if (balls === undefined) {
     return [];
   }
-  const batsmenStats = balls.reduce((accumulator, ball) => {
+  const batsmenStats = balls.reverse().reduce((accumulator, ball) => {
     const {
       batsman, runs, wicket, extras,
     } = ball;
@@ -48,12 +72,12 @@ const getBatsmenAggregateStats = (balls) => {
     if (batsman in stats) {
       stats[batsman] = updateBatsmanStats(stats, batsman, runs, wicket, extras);
     } else {
-      stats[batsman] = initialBatsmanStats(batsman, runs, extras);
+      stats[batsman] = initialBatsmanStats(batsman, runs, extras, wicket);
     }
     return stats;
   }, {});
 
-  return Object.keys(batsmenStats).map(batsmanName => batsmenStats[batsmanName]);
+  return getBatsmenStatsArray(batsmenStats, currentPlayer);
 };
 
 export default getBatsmenAggregateStats;

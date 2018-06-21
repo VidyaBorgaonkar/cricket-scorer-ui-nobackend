@@ -11,7 +11,7 @@ const addRow = (stats, index) => (
     <td>{stats.totalBalls}</td>
     <td>{stats.fours}</td>
     <td>{stats.sixes}</td>
-    <td>{stats.strikeRate.toFixed(2)}</td>
+    <td>{stats.strikeRate}</td>
   </tr>
 );
 
@@ -51,6 +51,7 @@ BatsmenStats.propTypes = {
   })).isRequired,
 };
 
-const mapStateToProps = state => ({ batsmen: getBatsmenAggregateStats(state.balls) });
+const mapStateToProps =
+        state => ({ batsmen: getBatsmenAggregateStats(state.balls, state.currentPlayers.batsmen) });
 
 export default connect(mapStateToProps)(BatsmenStats);
