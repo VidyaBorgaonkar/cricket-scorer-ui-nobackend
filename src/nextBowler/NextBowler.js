@@ -52,7 +52,7 @@ class NextBowlerModal extends React.Component {
 
   render() {
     if (this.props.bowler) return null;
-    const yetToPlayBatsmen = this.filterOutCurrentBowler();
+    const bowlersOtherThanLast = this.filterOutCurrentBowler();
     return (
       <div>
         <Modal isOpen className="">
@@ -64,7 +64,7 @@ class NextBowlerModal extends React.Component {
               </DropdownToggle>
               <DropdownMenu>
                 <DropdownItem header>Select Bowler</DropdownItem>
-                {yetToPlayBatsmen.map(name => (
+                {bowlersOtherThanLast.map(name => (
                   <DropdownItem
                     onClick={this.onClick}
                   >{name}

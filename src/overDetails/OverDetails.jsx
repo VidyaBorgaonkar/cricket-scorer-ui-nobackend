@@ -38,6 +38,9 @@ const mapToProps = state => ({
 export default connect(mapToProps)(OverDetails);
 
 OverDetails.propTypes = {
-  currentOverDetails: PropTypes.objectOf().isRequired,
+  currentOverDetails: PropTypes.shape({
+    overDetails: PropTypes.arrayOf(PropTypes.string).required,
+    ballsRemaining: PropTypes.number.required,
+  }).isRequired,
   bowler: PropTypes.string.isRequired,
 };
