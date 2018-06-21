@@ -61,7 +61,12 @@ class NextBatsmanModal extends React.Component {
             </ButtonDropdown>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={() => this.addNextBatsman(this.state.batsmanSelected)}>
+            <Button
+              color="primary"
+              onClick={() => {
+              if (this.state.batsmanSelected !== 'Select Batsman') { this.addNextBatsman(this.state.batsmanSelected); }
+}}
+            >
               {"Let's continue playing"}
             </Button>{' '}
           </ModalFooter>
