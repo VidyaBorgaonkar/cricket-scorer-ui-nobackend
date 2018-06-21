@@ -33,21 +33,20 @@ class NextBatsmanModal extends React.Component {
     const teamName = this.props.currentTeam === 0 ? 'team1' : 'team2';
     const wicketsFallen = this.props.balls.reduce((accumulator, ball) => {
       const batsmanName = ball.batsman;
-      const { wicket } = ball.wicket;
+      const { wicket } = ball;
       if (wicket) { accumulator.push(batsmanName); }
       return accumulator;
     }, []);
-    return this.props.allPlayers[teamName].filter(name => wicketsFallen.indexOf(name) === -1)
-      .filter(name => this.props.batsmen.indexOf(name) === -1);
+    return this.props.allPlayers[teamName].filter(name => !this.props.batsmen.includes(name))
+      .filter(name => !wicketsFallen.includes(name));
   }
 
   render() {
     const batsmenInStrike = this.props.batsmen.length !== 2;
-    const yetToPlayBatsmen = this.filterOutBatsmen();
     return (
       <div>
         <Modal isOpen={batsmenInStrike} className="">
-          <ModalHeader>Modal title</ModalHeader>
+          <ModalHeader>Select Batsman</ModalHeader>
           <ModalBody>
             <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
               <DropdownToggle caret>
@@ -55,7 +54,7 @@ class NextBatsmanModal extends React.Component {
               </DropdownToggle>
               <DropdownMenu>
                 <DropdownItem header>Select Batsman</DropdownItem>
-                {yetToPlayBatsmen.map(name => (
+                {this.filterOutBatsmen().map(name => (
                   <DropdownItem key={name} onClick={this.onClick}>{name}
                   </DropdownItem>))}
               </DropdownMenu>
