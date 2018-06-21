@@ -5,3 +5,4 @@ export const SELECT_BATSMAN = 'SELECT_BATSMAN';
 export const SELECT_RUNS_SCORED = 'SELECT_RUNS_SCORED';
 export const SELECT_EXTRA = 'SELECT_EXTRA';
 export const WICKET = 'WICKET';
+export const PLAY_NEXT_BATSMAN = 'PLAY_NEXT_BATSMAN';

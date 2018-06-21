@@ -4,6 +4,7 @@ function updateBowlerStats(bowlerStats, ball) {
     balls: bowlerStats.balls + 1,
     runs: bowlerStats.runs + ball.runs,
     ballByBallRuns: [...bowlerStats.ballByBallRuns, ball.runs],
+    wickets: ball.wicket ? bowlerStats.wickets + 1 : bowlerStats.wickets,
   };
 }
 
@@ -15,7 +16,7 @@ function initialBowlerStatsObject(ball) {
     maidens: 0,
     runs: ball.runs,
     ballByBallRuns: [ball.runs],
-    wickets: 0,
+    wickets: ball.wicket ? 1 : 0,
   };
 }
 
