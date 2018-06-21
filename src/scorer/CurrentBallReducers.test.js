@@ -107,3 +107,4 @@ describe('currentBallReducerOnWicketActionAgain', () => {
     expect(updateCurrentBall(state, action)).toEqual(newState);
   });
 });
+

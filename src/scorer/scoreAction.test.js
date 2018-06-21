@@ -1,4 +1,6 @@
-import { selectBatsman, selectRunsScored } from './scoreActions';
+
+import { updateScore, selectBatsman, selectRunsScored, wicketTaken, playNextBatsman } from './scoreActions';
+
 
 describe('[Select Batsman Actions]', () => {
   it('Test Select Batsman Action', () => {
@@ -17,6 +19,25 @@ describe('[Select Runs Scored Actions]', () => {
 
     expect(action.type).toEqual('SELECT_RUNS_SCORED');
     expect(action.payload).toEqual(4);
+  });
+});
+
+
+describe('[Wicket taken Actions]', () => {
+  it('Test Wicket taken Action', () => {
+    const action = wicketTaken();
+
+    expect(action.type).toEqual('WICKET');
+  });
+});
+
+describe('[Play Next Batsman  Actions]', () => {
+  it('Test Play next batsman Action', () => {
+    const batsman = 'Player1.2';
+    const action = playNextBatsman(batsman);
+
+    expect(action.type).toEqual('PLAY_NEXT_BATSMAN');
+    expect(action.payload).toEqual(batsman);
   });
 });
 
