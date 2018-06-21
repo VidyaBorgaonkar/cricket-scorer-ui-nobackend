@@ -7,6 +7,7 @@ export const updateScore = (data) => {
     runs: data.selectedRuns,
     extras: data.extras,
     wicket: data.wicket,
+    currentOver: Math.floor(data.over),
   };
   return {
     type: NEXT_BALL,
