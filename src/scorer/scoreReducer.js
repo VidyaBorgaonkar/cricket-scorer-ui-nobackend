@@ -13,32 +13,40 @@ export const initialScoreBoard = {
 const updateScoreboard = (state = initialScoreBoard, action) => {
   switch (action.type) {
     case NEXT_BALL: {
-      const { extras } = action.payload;
-      if (extras.length !== 0) {
-        for (let i = 0; i < extras.length; i += 1) {
-          if (extras.indexOf('W') !== -1 || extras.indexOf('N') !== -1) {
-            return {
-              currentTeamIndex: state.currentTeamIndex,
-              scoreboard: [{
-                total: state.scoreboard[0].total + 1 + action.payload.runs,
-                wickets: 0,
-                totalBalls: state.scoreboard[0].totalBalls,
-                overs: state.scoreboard[0].overs,
-              }, state.scoreboard[1]],
-            };
-          }
-        }
-      }
-      const countBalls = state.scoreboard[0].totalBalls + 1;
-      return {
-        currentTeamIndex: state.currentTeamIndex,
-        scoreboard: [{
-          total: state.scoreboard[0].total + action.payload.runs,
+      const { extras, runs } = action.payload;
+      const { currentTeamIndex, scoreboard } = state;
+      const currentTeam = state.scoreboard[currentTeamIndex];
+
+      const total = currentTeam.total + runs;
+
+      if (extras.includes('W') || extras.includes('N')) {
+        scoreboard[currentTeamIndex] = {// TODO fix later
+          ...currentTeam,
+          total: total + 1,
           wickets: 0,
-          totalBalls: countBalls,
-          overs: Math.floor(countBalls / 6) +
-          ((countBalls % 6) / 10),
-        }, state.scoreboard[1]],
+        };
+
+        return {
+          ...state,
+          scoreboard: [...scoreboard],
+        };
+      }
+
+      const totalBalls = currentTeam.totalBalls + 1;
+      const overs = Math.floor(totalBalls / 6) + ((totalBalls % 6) / 10);
+
+      scoreboard[currentTeamIndex] = {// TODO fix later
+        ...currentTeam,
+        total,
+        wickets: 0,
+        totalBalls,
+        overs,
+      };
+
+
+      return {
+        ...state,
+        scoreboard: [...scoreboard],
       };
     }
     default:
