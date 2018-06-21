@@ -21,7 +21,7 @@ const createRunsButton = (props, score) => (
 
 createRunsButton.propTypes = {
   selectedRuns: PropTypes.number.isRequired,
-  selectRunsScored: PropTypes.number.isRequired,
+  selectRunsScored: PropTypes.func.isRequired,
 };
 
 
@@ -58,9 +58,9 @@ const BatsmenToolBar = props => (
   </ButtonGroup>);
 
 BatsmenToolBar.propTypes = {
-  batsmen: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+  batsmen: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   selectedBatsman: PropTypes.string.isRequired,
-  selectBatsman: PropTypes.string.isRequired,
+  selectBatsman: PropTypes.func.isRequired,
 
 };
 
@@ -77,7 +77,7 @@ const OutButton = props => (
   </ButtonGroup>);
 
 OutButton.propTypes = {
-  onOutBtnClick: PropTypes.string.isRequired,
+  onOutBtnClick: PropTypes.func.isRequired,
   wicketStatus: PropTypes.bool.isRequired,
 };
 
@@ -120,7 +120,7 @@ const ThisBall = props => (
   </Container>);
 
 ThisBall.propTypes = {
-  batsmen: PropTypes.string.isRequired,
+  batsmen: PropTypes.arrayOf(PropTypes.string).isRequired,
   selectedBatsman: PropTypes.string.isRequired,
   selectedRuns: PropTypes.number.isRequired,
   wicketStatus: PropTypes.bool.isRequired,

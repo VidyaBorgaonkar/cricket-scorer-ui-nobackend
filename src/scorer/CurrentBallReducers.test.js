@@ -7,7 +7,7 @@ describe('currentBallReducerOnLoad', () => {
     const newState = {
       batsman: '',
       extras: [],
-      runs: -1,
+      runs: undefined,
       wicket: false,
     };
 
@@ -29,7 +29,7 @@ describe('currentBallReducerOnNewBallAction', () => {
     const newState = {
       batsman: '',
       extras: [],
-      runs: -1,
+      runs: undefined,
       wicket: false,
     };
 

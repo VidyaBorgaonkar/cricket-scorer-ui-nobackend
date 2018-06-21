@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, ButtonDropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
 import { connect } from 'react-redux';
-import { playNextBatsman} from './scoreActions';
+import { playNextBatsman } from './scoreActions';
 
 
 class NextBatsmanModal extends React.Component {
@@ -10,33 +10,35 @@ class NextBatsmanModal extends React.Component {
     super(props);
 
     this.addNextBatsman = this.props.addNextBatsman.bind(this);
-
+    this.toggle = this.toggle.bind(this);
+    this.onClick = this.onClick.bind(this);
     this.state = {
       dropdownOpen: false,
-      batsmanSelected: 'Select Batsman'
-    }
+      batsmanSelected: 'Select Batsman',
+    };
+  }
+
+  onClick(e) {
+    this.setState({ batsmanSelected: e.currentTarget.textContent });
+  }
+
+
+  toggle() {
+    this.setState(prevState => ({
+      dropdownOpen: !prevState.dropdownOpen,
+    }));
   }
 
   filterOutBatsmen() {
     const teamName = this.props.currentTeam === 0 ? 'team1' : 'team2';
     const wicketsFallen = this.props.balls.reduce((accumulator, ball) => {
       const batsmanName = ball.batsman;
-      const wicket = ball.wicket;
+      const { wicket } = ball.wicket;
       if (wicket) { accumulator.push(batsmanName); }
       return accumulator;
     }, []);
-    return this.props.allPlayers[teamName].filter(name => wicketsFallen.indexOf(name) === -1).filter(name => this.props.batsmen.indexOf(name) === -1);
-  }
-
-  toggle = (e) => {
-    this.setState(prevState => ({
-      dropdownOpen: !prevState.dropdownOpen,
-    }));
-  }
-
-  onClick = (e) => {
-    this.setState({
-      batsmanSelected: e.currentTarget.textContent});
+    return this.props.allPlayers[teamName].filter(name => wicketsFallen.indexOf(name) === -1)
+      .filter(name => this.props.batsmen.indexOf(name) === -1);
   }
 
   render() {
@@ -53,13 +55,15 @@ class NextBatsmanModal extends React.Component {
               </DropdownToggle>
               <DropdownMenu>
                 <DropdownItem header>Select Batsman</DropdownItem>
-                {yetToPlayBatsmen.map(name => <DropdownItem onClick={this.onClick}>{name}</DropdownItem>)}
+                {yetToPlayBatsmen.map(name => (
+                  <DropdownItem key={name} onClick={this.onClick}>{name}
+                  </DropdownItem>))}
               </DropdownMenu>
             </ButtonDropdown>
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={() => this.addNextBatsman(this.state.batsmanSelected)}>
-                Let's continue playing
+              {"Let's continue playing"}
             </Button>{' '}
           </ModalFooter>
         </Modal>
@@ -68,6 +72,20 @@ class NextBatsmanModal extends React.Component {
   }
 }
 
+NextBatsmanModal.propTypes = {
+  batsmen: PropTypes.arrayOf(PropTypes.string).isRequired,
+  allPlayers: PropTypes.shape({}).isRequired,
+  currentTeam: PropTypes.number.isRequired,
+  balls: PropTypes.arrayOf(PropTypes.shape({
+    batsman: PropTypes.string.isRequired,
+    bowler: PropTypes.string.isRequired,
+    runs: PropTypes.number,
+    extras: PropTypes.arrayOf(PropTypes.string).isRequired,
+    wicket: PropTypes.bool.isRequired,
+    currentOver: PropTypes.number.isRequired,
+  })).isRequired,
+  addNextBatsman: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = state => ({
   batsmen: state.currentPlayers.batsmen,
@@ -78,7 +96,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-   addNextBatsman: (batsmanName) => dispatch(playNextBatsman(batsmanName)),
+  addNextBatsman: batsmanName => dispatch(playNextBatsman(batsmanName)),
 });
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(NextBatsmanModal);
