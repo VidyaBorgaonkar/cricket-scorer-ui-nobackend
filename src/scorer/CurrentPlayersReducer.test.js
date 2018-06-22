@@ -10,7 +10,7 @@ describe('updateCurrentPlayersOnLoad', () => {
     };
 
 
-    expect(updateCurrentPlayers(undefined, action)).toEqual(newState);
+    expect(updateCurrentPlayers(newState, action)).toEqual(newState);
   });
 });
 

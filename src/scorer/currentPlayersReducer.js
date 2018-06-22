@@ -1,8 +1,8 @@
 import { NEXT_BALL, NEXT_OVER, PLAY_NEXT_BATSMAN, SELECT_BOWLER } from '../store/actionConstants';
 
 export const initialCurrentPlayers = {
-  batsmen: ['Player1.1', 'Player1.2'],
-  bowler: 'Player2.1',
+  batsmen: [],
+  bowler: undefined,
 };
 
 const updateCurrentPlayers = (state = initialCurrentPlayers, action) => {
@@ -18,6 +18,10 @@ const updateCurrentPlayers = (state = initialCurrentPlayers, action) => {
       return { ...state, batsmen: [...state.batsmen, action.payload] };
 
     case NEXT_OVER: {
+      if (action.currentOver + 1 === action.totalNoOfOvers) {
+        return initialCurrentPlayers;
+      }
+
       return { ...state, bowler: undefined };
     }
     case SELECT_BOWLER: {

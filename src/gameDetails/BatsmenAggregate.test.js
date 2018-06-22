@@ -1,5 +1,9 @@
 import getBatsmenAggregateStats from './BatsmenAggregation';
-import { initialCurrentPlayers } from '../scorer/currentPlayersReducer';
+
+const initialCurrentPlayers = {
+  batsmen: ['Player1.1', 'Player1.2'],
+  bowler: 'Player2.1',
+};
 
 describe('BatsmenAggregation/getBatsmenAggregateStats', () => {
   it('should return empty array if empty array is passed as argument', () => {

@@ -16,7 +16,7 @@ const ScoreBoard = (props = initialScoreBoard) => {
         <Col md={{ size: 6, offset: 3 }}>
           <Row>
             <Col md="5" xs="4">
-              <b>Team {props.currentTeamIndex + 1}</b><br />
+              <b> {props.names[props.currentTeamIndex]}</b><br />
             </Col>
             <Col sm="1" xs="2" />
             <Col style={{ textAlign: 'right' }}>
@@ -35,7 +35,7 @@ const ScoreBoard = (props = initialScoreBoard) => {
           <Col md={{ size: 6, offset: 3 }} sm="12">
             <Row>
               <Col>
-                   Team {otherTeamIndex + 1} scored
+                {props.names[otherTeamIndex]} scored
               </Col>
               <Col style={{ textAlign: 'right' }}>
                 {props.scoreboard[otherTeamIndex].total}/
@@ -50,7 +50,7 @@ const ScoreBoard = (props = initialScoreBoard) => {
         <Row>
           <Col md={{ size: 6, offset: 3 }} sm="12">
             <Row>
-              <Col>Team {otherTeamIndex + 1} yet to play</Col>
+              <Col>{props.names[otherTeamIndex]} yet to play</Col>
             </Row>
           </Col>
         </Row>
@@ -59,17 +59,17 @@ const ScoreBoard = (props = initialScoreBoard) => {
     </Container>);
 };
 
-const mapToProps = (state) => {
-  return {
-    currentTeamIndex: state.scoreInformation.currentTeamIndex,
-    scoreboard: state.scoreInformation.scoreboard,
-    totalNoOfOvers: state.gameInformation.numberOfOvers,
-  };
-};
+const mapToProps = state => ({
+  currentTeamIndex: state.scoreInformation.currentTeamIndex,
+  scoreboard: state.scoreInformation.scoreboard,
+  totalNoOfOvers: state.gameInformation.numberOfOvers,
+  names: state.gameInformation.names,
+});
 export default connect(mapToProps)(ScoreBoard);
 
 ScoreBoard.propTypes = {
   currentTeamIndex: PropTypes.number.isRequired,
   scoreboard: PropTypes.arrayOf(PropTypes.object).isRequired,
   totalNoOfOvers: PropTypes.number.isRequired,
+  names: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
