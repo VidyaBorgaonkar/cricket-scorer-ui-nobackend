@@ -1,4 +1,4 @@
-import {INNINGS_OVER, NEXT_BALL, NEXT_OVER} from '../store/actionConstants';
+import { INNINGS_OVER, NEXT_BALL, NEXT_OVER } from '../store/actionConstants';
 import { convertBallsToOvers } from '../utilis';
 
 export const initialScoreBoard = {

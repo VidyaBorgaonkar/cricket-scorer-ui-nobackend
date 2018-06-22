@@ -1,4 +1,4 @@
-import {NEXT_BALL, NEXT_OVER, PLAY_NEXT_BATSMAN, SELECT_BOWLER, INNINGS_OVER} from '../store/actionConstants';
+import { NEXT_BALL, NEXT_OVER, PLAY_NEXT_BATSMAN, SELECT_BOWLER, INNINGS_OVER } from '../store/actionConstants';
 
 export const initialCurrentPlayers = {
   batsmen: [],
