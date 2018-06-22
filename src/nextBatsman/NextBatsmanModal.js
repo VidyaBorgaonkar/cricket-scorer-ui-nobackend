@@ -64,8 +64,12 @@ export class NextBatsmanModal extends React.Component {
             <Button
               color="primary"
               onClick={() => {
-              if (this.state.batsmanSelected !== 'Select Batsman') { this.addNextBatsman(this.state.batsmanSelected); }
-}}
+                      if (this.state.batsmanSelected !== 'Select Batsman') {
+                          this.addNextBatsman(this.state.batsmanSelected);
+                          this.setState({ batsmanSelected: 'Select Batsman' });
+                      }
+                  }
+              }
             >
               {"Let's continue playing"}
             </Button>{' '}
