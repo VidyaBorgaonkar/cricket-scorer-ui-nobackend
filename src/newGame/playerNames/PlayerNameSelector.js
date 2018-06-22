@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Container, Input, Row } from 'reactstrap';
+import { Col, Input, Row } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { UPDATE_PLAYER_NAME } from '../../store/actionConstants';

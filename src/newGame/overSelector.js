@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, Col, Container, Row } from 'reactstrap';
+import { Input, Col, Row } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { UPDATE_MAX_OVERS } from '../store/actionConstants';
