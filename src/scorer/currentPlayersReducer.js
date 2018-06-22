@@ -18,6 +18,10 @@ const updateCurrentPlayers = (state = initialCurrentPlayers, action) => {
       return { ...state, batsmen: [...state.batsmen, action.payload] };
 
     case NEXT_OVER: {
+      if (action.currentOver + 1 === action.totalNoOfOvers) {
+        return initialCurrentPlayers;
+      }
+
       return { ...state, bowler: undefined };
     }
     case SELECT_BOWLER: {
