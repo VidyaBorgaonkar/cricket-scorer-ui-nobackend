@@ -22,7 +22,7 @@ class TeamNameSelector extends React.Component {
           <Col md={{ size: 6, offset: 3 }}>
             <Row>
               <Col>
-                  Team {`${this.props.teamIndex + 1}`} name
+                  Team{`${this.props.teamIndex + 1}`} Name
               </Col>
             </Row>
             <Row>

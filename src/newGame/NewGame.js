@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'reactstrap';
+import { Button, Container, Row, Col } from 'reactstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -25,21 +25,42 @@ class NewGame extends React.Component {
         <TeamNameSelector teamIndex={0} />
         <TeamNameSelector teamIndex={1} />
         <OverSelector />
-
-        <Button onClick={() => { this.setState({ step: 1 }); }}>Next</Button>
-      </div>
-    );
+        <div className="col-md-4 text-center">
+          <Button
+            onClick={() => {
+                      this.setState({ step: 1 });
+                  }}
+            color="primary"
+            className="btn btn-primary"
+          >Next
+          </Button>
+        </div>
+      </div>);
   }
 
   renderStep2() {
     return (
       <div>
-        <div>{this.props.teamNames[0]}</div>
+        <div>
+          <Container>
+            <Row>
+              <Col><b>{this.props.teamNames[0]}</b>
+              </Col>
+            </Row>
+          </Container>
+        </div>
         {
             Array.from(Array(11).keys())
                 .map(playerIndex => (<PlayerNameSelector team="team1" playerIndex={playerIndex} />))
         }
-        <Button onClick={() => { this.setState({ step: 2 }); }}>Next</Button>
+        <div className="col-md-4 text-center">
+          <Button
+            onClick={() => { this.setState({ step: 2 }); }}
+            color="primary"
+            className="btn btn-primary"
+          >Next
+          </Button>
+        </div>
       </div>
     );
   }

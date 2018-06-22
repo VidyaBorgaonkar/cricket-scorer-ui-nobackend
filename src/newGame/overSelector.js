@@ -22,6 +22,7 @@ class OverSelector extends React.Component {
           <Col md={{ size: 6, offset: 3 }}>
             <Row>
               <Col>
+                Number of Overs
                 <Input
                   type="text"
                   value={this.state.maxOvers}
