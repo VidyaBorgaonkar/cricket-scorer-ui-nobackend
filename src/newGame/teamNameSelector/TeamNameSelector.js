@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, Col, Container, Row } from 'reactstrap';
+import { Input, Col, Row } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { UPDATE_TEAM_NAME } from '../../store/actionConstants';
@@ -17,28 +17,25 @@ class TeamNameSelector extends React.Component {
 
   render() {
     return (
-      <Container className="mt-3 mb-3">
-        <Row>
-          <Col md={{ size: 6, offset: 3 }}>
-            <Row>
-              <Col>
+      <div className="col-md-6 offset-md-3">
+        <Col className="text-center">
+          <Row>
+            <Col>
                   Team{`${this.props.teamIndex + 1}`} Name
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <Input
-                  type="text"
-                  value={this.state.teamName}
-                  onChange={e => this.setState({ teamName: e.target.value })}
-                  onBlur={() => this.onBlur()}
-                />
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-
-      </Container>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Input
+                type="text"
+                value={this.state.teamName}
+                onChange={e => this.setState({ teamName: e.target.value })}
+                onBlur={() => this.onBlur()}
+              />
+            </Col>
+          </Row>
+        </Col>
+      </div>
     );
   }
 }

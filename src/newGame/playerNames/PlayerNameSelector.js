@@ -17,23 +17,18 @@ class PlayerNameSelector extends React.Component {
 
   render() {
     return (
-      <Container className="mt-3 mb-3">
+      <Col md={{ size: 6, offset: 3 }}>
         <Row>
-          <Col md={{ size: 6, offset: 3 }}>
-            <Row>
-              <Col>
-                <Input
-                  type="text"
-                  value={this.state.playerName}
-                  onChange={e => this.setState({ playerName: e.target.value })}
-                  onBlur={() => this.onBlur()}
-                />
-              </Col>
-            </Row>
+          <Col className="mt-2">
+            <Input
+              type="text"
+              value={this.state.playerName}
+              onChange={e => this.setState({ playerName: e.target.value })}
+              onBlur={() => this.onBlur()}
+            />
           </Col>
         </Row>
-
-      </Container>
+      </Col>
     );
   }
 }

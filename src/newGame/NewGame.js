@@ -13,18 +13,17 @@ import NextBowler from '../nextBowler/NextBowler';
 
 function renderStep4() {
   return (
-    <div>
-      <NextBatsmanModal />
-      <NextBowler />
-      <div className="col-md-4 text-center">
-        <Button
-          color="primary"
-          className="btn btn-primary"
-          onClick={() => { history.push(Routes.SCORER); }}
-        >Next
-        </Button>
-      </div>
-    </div>
+    <Container className="h-100">
+      <Row className="align-items-center h-100">
+        <Col className="text-center">
+          <NextBatsmanModal />
+          <NextBowler />
+          <Button color="primary" onClick={() => { history.push(Routes.SCORER); }}>
+              Lets Play
+          </Button>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
@@ -40,11 +39,17 @@ class NewGame extends React.Component {
 
   renderStep1() {
     return (
-      <div>
-        <TeamNameSelector teamIndex={0} />
-        <TeamNameSelector teamIndex={1} />
-        <OverSelector />
-        <div className="col-md-4 text-center">
+      <Container >
+        <Row className="mt-5">
+          <TeamNameSelector teamIndex={0} />
+        </Row>
+        <Row className="mt-3">
+          <TeamNameSelector teamIndex={1} />
+        </Row>
+        <Row className="mt-3">
+          <OverSelector />
+        </Row>
+        <div className="col-md-12 text-center mt-4">
           <Button
             onClick={() => {
                       this.setState({ step: 1 });
@@ -54,25 +59,22 @@ class NewGame extends React.Component {
           >Next
           </Button>
         </div>
-      </div>);
+      </Container>);
   }
 
   renderStep2() {
     return (
-      <div>
-        <div>
-          <Container>
-            <Row>
-              <Col><b>{this.props.teamNames[0]}</b>
-              </Col>
-            </Row>
-          </Container>
-        </div>
+      <Container >
+        <Row className="mt-5">
+          <Col className="col-md-6 offset-md-3">
+            <b>{this.props.teamNames[0]}</b>
+          </Col>
+        </Row>
         {
             Array.from(Array(11).keys())
                 .map(playerIndex => (<PlayerNameSelector team="team1" playerIndex={playerIndex} />))
         }
-        <div className="col-md-4 text-center">
+        <div className="col-md-12 text-center mt-4">
           <Button
             onClick={() => { this.setState({ step: 2 }); }}
             color="primary"
@@ -80,28 +82,24 @@ class NewGame extends React.Component {
           >Next
           </Button>
         </div>
-      </div>
+      </Container>
     );
   }
 
   renderStep3() {
     return (
-      <div>
-        <div>
-          <Container>
-            <Row>
-              <Col>
-                <b>{this.props.teamNames[1]}</b>
-              </Col>
-            </Row>
-          </Container>
-        </div>
+      <Container >
+        <Row className="mt-5">
+          <Col className="col-md-6 offset-md-3">
+            <b>{this.props.teamNames[1]}</b>
+          </Col>
+        </Row>
         {
               Array.from(Array(11).keys())
                   .map(playerIndex => (
                     <PlayerNameSelector key={`team2${playerIndex}`} team="team2" playerIndex={playerIndex} />))
           }
-        <div className="col-md-4 text-center">
+        <div className="col-md-12 text-center mt-4">
           <Button
             onClick={() => {
                       this.setState({ step: 3 });
@@ -111,7 +109,8 @@ class NewGame extends React.Component {
           >Next
           </Button>
         </div>
-      </div>);
+      </Container>
+    );
   }
 
   render() {

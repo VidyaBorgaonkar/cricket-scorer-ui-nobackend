@@ -17,11 +17,10 @@ class OverSelector extends React.Component {
 
   render() {
     return (
-      <Container className="mt-3 mb-3">
-        <Row>
-          <Col md={{ size: 6, offset: 3 }}>
-            <Row>
-              <Col>
+      <div className="col-md-6 offset-md-3">
+        <Col className="text-center">
+          <Row>
+            <Col>
                 Number of Overs
                 <Input
                   type="text"
@@ -29,12 +28,10 @@ class OverSelector extends React.Component {
                   onChange={e => this.setState({ maxOvers: e.target.value })}
                   onBlur={() => this.onBlur()}
                 />
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-
-      </Container>
+            </Col>
+          </Row>
+        </Col>
+      </div>
     );
   }
 }
