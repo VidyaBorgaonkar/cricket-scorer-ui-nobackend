@@ -80,16 +80,32 @@ class NewGame extends React.Component {
   }
 
   renderStep3() {
-    return (
+    return (<div>
       <div>
-        <div>{this.props.teamNames[1]}</div>
-        {
-                    Array.from(Array(11).keys())
-                        .map(playerIndex => (<PlayerNameSelector key={`team2${playerIndex}`} team="team2" playerIndex={playerIndex} />))
-                }
-        <Button onClick={() => { this.setState({ step: 3 }); }}>Next</Button>
+        <Container>
+          <Row>
+            <Col>
+              <b>{this.props.teamNames[1]}</b>
+            </Col>
+          </Row>
+        </Container>
       </div>
-    );
+      {
+              Array.from(Array(11).keys())
+                  .map(playerIndex => (
+                    <PlayerNameSelector key={`team2${playerIndex}`} team="team2" playerIndex={playerIndex} />))
+          }
+      <div className="col-md-4 text-center">
+        <Button
+          onClick={() => {
+                      this.setState({ step: 3 });
+                  }}
+          color="primary"
+          className="btn btn-primary"
+        >Next
+        </Button>
+      </div>
+    </div>);
   }
 
   render() {

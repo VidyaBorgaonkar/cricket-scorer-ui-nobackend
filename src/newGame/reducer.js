@@ -23,7 +23,7 @@ const initialState = {
     'Player2.9',
     'Player2.10',
     'Player2.11'],
-  numberOfOvers: 5,
+  numberOfOvers: 1,
   names: ['team1', 'team2'],
 };
 
