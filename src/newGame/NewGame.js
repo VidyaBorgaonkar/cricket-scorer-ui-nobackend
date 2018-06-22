@@ -1,13 +1,13 @@
 import React from 'react';
 import { Button } from 'reactstrap';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import TeamNameSelector from './teamNameSelector/TeamNameSelector';
 import PlayerNameSelector from './playerNames/PlayerNameSelector';
 import OverSelector from './overSelector';
 import { Routes } from '../routes/routes';
 import history from '../routes/history';
-import PropTypes from 'prop-types';
 
 class NewGame extends React.Component {
   constructor(props) {

@@ -49,10 +49,9 @@ PlayerNameSelector.defaultProps = {
   playerName: '',
 };
 
-const mapStateToProps = (state, props) => {
-  return{
+const mapStateToProps = (state, props) => ({
   playerName: state.gameInformation[props.team][props.playerIndex],
-}};
+});
 
 export function updatePlayerNameAction(team, playerIndex, playerName) {
   return {

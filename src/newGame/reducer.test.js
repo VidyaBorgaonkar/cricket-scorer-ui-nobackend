@@ -1,6 +1,6 @@
 import reducer from './reducer';
 import { updateTeamNameAction } from './teamNameSelector/TeamNameSelector';
-import {updateMaxOversAction} from "./overSelector";
+import { updateMaxOversAction } from './overSelector';
 import { updatePlayerNameAction } from './playerNames/PlayerNameSelector';
 
 describe('gameInformation/reducer', () => {
