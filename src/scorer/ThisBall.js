@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { Button, ButtonGroup, Col, Container, Row } from 'reactstrap';
 import { connect } from 'react-redux';
 import Extras from './Extras';
-import { selectBatsman, selectRunsScored, updateScore, wicketTaken } from './scoreActions';
+import { selectBatsman, selectRunsScored, updateScore } from './scoreActions';
+import { wicketTaken } from '../nextBatsman/actions';
 
 
 const createRunsButton = (props, score) => (

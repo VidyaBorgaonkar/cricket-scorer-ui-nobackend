@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, ButtonDropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
 import { connect } from 'react-redux';
-import { playNextBatsman } from './scoreActions';
+import { playNextBatsman } from '../nextBatsman/actions';
 
 
-class NextBatsmanModal extends React.Component {
+export class NextBatsmanModal extends React.Component {
   constructor(props) {
     super(props);
 

@@ -1,4 +1,4 @@
-import { NEXT_BALL, SELECT_BATSMAN, SELECT_RUNS_SCORED, SELECT_EXTRA, WICKET, NEXT_OVER, PLAY_NEXT_BATSMAN } from '../store/actionConstants';
+import { NEXT_BALL, SELECT_BATSMAN, SELECT_RUNS_SCORED, SELECT_EXTRA, NEXT_OVER } from '../store/actionConstants';
 
 export const updateScore = (data) => {
   const payload = {
@@ -39,14 +39,5 @@ export const selectRunsScored = runs => ({
 export const selectExtra = extra => ({
   type: SELECT_EXTRA,
   extra,
-});
-
-export const wicketTaken = () => ({
-  type: WICKET,
-});
-
-export const playNextBatsman = batsmanName => ({
-  type: PLAY_NEXT_BATSMAN,
-  payload: batsmanName,
 });
 
