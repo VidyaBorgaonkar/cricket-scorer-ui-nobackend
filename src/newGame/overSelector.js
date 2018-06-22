@@ -22,12 +22,12 @@ class OverSelector extends React.Component {
           <Row>
             <Col>
                 Number of Overs
-                <Input
-                  type="text"
-                  value={this.state.maxOvers}
-                  onChange={e => this.setState({ maxOvers: e.target.value })}
-                  onBlur={() => this.onBlur()}
-                />
+              <Input
+                type="text"
+                value={this.state.maxOvers}
+                onChange={e => this.setState({ maxOvers: e.target.value })}
+                onBlur={() => this.onBlur()}
+              />
             </Col>
           </Row>
         </Col>
