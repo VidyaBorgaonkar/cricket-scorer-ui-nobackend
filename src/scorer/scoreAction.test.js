@@ -83,7 +83,65 @@ describe('[Select Next Ball Actions]', () => {
       totalNoOfOvers: 1,
     });
   });
+
+
+  it('Next ball action should dispatch a INNINGS_OVER action when all wickets have fallen', () => {
+    const data = {
+      bowler: 'player2.1',
+      selectedBatsman: 'player10',
+      selectedRuns: 0,
+      over: 3.2,
+      extras: [],
+      wicket: true,
+
+    };
+    const actionFn = updateScore(data);
+
+    const mockDispatch = jest.fn();
+    const mockGetState = () =>
+      ({
+        currentOverDetails: { ballsRemaining: 4 },
+        gameInformation: { numberOfOvers: 5 },
+        scoreInformation: {
+          currentTeamIndex: 0,
+          scoreboard: [
+            {
+              total: 0,
+              wickets: 10,
+              overs: 3.2,
+              totalBalls: 14,
+            },
+            {
+              total: 0,
+              wickets: 0,
+              overs: 0,
+              totalBalls: 0,
+            },
+          ],
+        },
+      });
+
+    actionFn(mockDispatch, mockGetState);
+    expect(mockDispatch.mock.calls.length).toBe(2);
+
+    expect(mockDispatch.mock.calls[0][0]).toEqual({
+      type: 'NEXT_BALL',
+      payload: {
+        batsman: 'player10',
+        bowler: 'player2.1',
+        runs: 0,
+        currentOver: 3,
+        extras: [],
+        wicket: true,
+      },
+    });
+
+    expect(mockDispatch.mock.calls[1][0]).toEqual({
+      type: 'INNINGS_OVER',
+    });
+  });
 });
+
 // TODO fix later
 // describe('[Select Next Ball Actions]', () => {
 //   it('Test Next Ball Action', () => {

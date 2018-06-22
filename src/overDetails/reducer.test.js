@@ -1,5 +1,5 @@
 import reducer from './reducer';
-import { NEXT_BALL, NEXT_OVER } from '../store/actionConstants';
+import { INNINGS_OVER, NEXT_BALL, NEXT_OVER } from '../store/actionConstants';
 
 
 const updateScore = (runs = 0, extras = [], wicket = false) => ({
@@ -56,6 +56,16 @@ describe('gameInformation/reducer', () => {
     state = reducer(state, updateScore(1));
     state = reducer(state, updateScore(1));
     state = reducer(state, { type: NEXT_OVER, currentOver: 0 });
+
+    expect(state).toEqual(initialState);
+  });
+
+  it('should reset the state to initialState after INNINGS_OVER', () => {
+    const initialState = { ballsRemaining: 6, overDetails: [] };
+
+
+    let state = reducer(undefined, updateScore(1));
+    state = reducer(state, { type: INNINGS_OVER });
 
     expect(state).toEqual(initialState);
   });

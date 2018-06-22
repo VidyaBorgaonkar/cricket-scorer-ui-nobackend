@@ -1,4 +1,4 @@
-import { NEXT_BALL, NEXT_OVER } from '../store/actionConstants';
+import { INNINGS_OVER, NEXT_BALL, NEXT_OVER } from '../store/actionConstants';
 import { isCorrectBall } from '../utilis';
 
 export const initialState = { overDetails: [], ballsRemaining: 6 };
@@ -28,7 +28,8 @@ const updateCurrentOver = (state = initialState, action) => {
 
       return { overDetails: [...state.overDetails, currentBallDetails], ballsRemaining };
     }
-    case NEXT_OVER: {
+    case NEXT_OVER:
+    case INNINGS_OVER: {
       return initialState;
     }
     default:

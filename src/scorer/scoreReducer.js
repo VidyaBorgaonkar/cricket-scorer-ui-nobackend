@@ -1,4 +1,4 @@
-import { NEXT_BALL, NEXT_OVER } from '../store/actionConstants';
+import {INNINGS_OVER, NEXT_BALL, NEXT_OVER} from '../store/actionConstants';
 import { convertBallsToOvers } from '../utilis';
 
 export const initialScoreBoard = {
@@ -57,6 +57,10 @@ const updateScoreboard = (state = initialScoreBoard, action) => {
         return { ...state, currentTeamIndex };
       }
       return state;
+    }
+    case INNINGS_OVER: {
+      const currentTeamIndex = state.currentTeamIndex === 0 ? 1 : 0;
+      return { ...state, currentTeamIndex };
     }
     default:
       return state;

@@ -1,5 +1,5 @@
 import updateCurrentPlayers from './currentPlayersReducer';
-import { NEXT_BALL, PLAY_NEXT_BATSMAN } from '../store/actionConstants';
+import { INNINGS_OVER, NEXT_BALL, PLAY_NEXT_BATSMAN } from '../store/actionConstants';
 
 describe('updateCurrentPlayersOnLoad', () => {
   it('should return initial state when loading DOM ', () => {
@@ -60,3 +60,22 @@ describe('currentPlayersReducerOnPlayNextBatsmanAction', () => {
   });
 });
 
+
+describe('currentPlayersReducerOnInningsOverAction', () => {
+  it('should clear internal state on INNINGS_OVER Action', () => {
+    const state = {
+      batsmen: ['Player1.1'],
+      bowler: 'Player2.1',
+    };
+    const action = {
+      type: INNINGS_OVER,
+    };
+    const newState = {
+      batsmen: [],
+      bowler: undefined,
+    };
+
+
+    expect(updateCurrentPlayers(state, action)).toEqual(newState);
+  });
+});

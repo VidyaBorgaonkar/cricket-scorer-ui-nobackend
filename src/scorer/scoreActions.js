@@ -1,4 +1,11 @@
-import { NEXT_BALL, SELECT_BATSMAN, SELECT_RUNS_SCORED, SELECT_EXTRA, NEXT_OVER } from '../store/actionConstants';
+import {
+  NEXT_BALL,
+  SELECT_BATSMAN,
+  SELECT_RUNS_SCORED,
+  SELECT_EXTRA,
+  NEXT_OVER,
+  INNINGS_OVER,
+} from '../store/actionConstants';
 
 export const updateScore = (data) => {
   const payload = {
@@ -22,6 +29,16 @@ export const updateScore = (data) => {
         currentOver: payload.currentOver,
         totalNoOfOvers: stateAfterNextBall.gameInformation.numberOfOvers,
       });
+    }
+
+    if (payload.wicket) {
+      const stateAfterNextOver = getState();
+      const index = stateAfterNextOver.scoreInformation.currentTeamIndex;
+      if (stateAfterNextOver.scoreInformation.scoreboard[index].wickets === 10) {
+        dispatch({
+          type: INNINGS_OVER,
+        });
+      }
     }
   };
 };
