@@ -4,8 +4,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, ButtonDropdown, Dro
 import { connect } from 'react-redux';
 import { playNextBatsman } from '../nextBatsman/actions';
 
-
-export class NextBatsmanModal extends React.Component {
+class NextBatsmanModal extends React.Component {
   constructor(props) {
     super(props);
 
