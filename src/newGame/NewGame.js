@@ -11,25 +11,30 @@ import history from '../routes/history';
 import NextBatsmanModal from '../nextBatsman/NextBatsmanModal';
 import NextBowler from '../nextBowler/NextBowler';
 
+function renderStep4() {
+  return (
+    <div>
+      <NextBatsmanModal />
+      <NextBowler />
+      <div className="col-md-4 text-center">
+        <Button
+          color="primary"
+          className="btn btn-primary"
+          onClick={() => { history.push(Routes.SCORER); }}
+        >Next
+        </Button>
+      </div>
+    </div>
+  );
+}
 
 class NewGame extends React.Component {
-  static renderStep4() {
-    return (
-      <div>
-        <NextBatsmanModal />
-        <NextBowler />
-        <Button onClick={() => { history.push(Routes.SCORER); }}>Next</Button>
-
-      </div>
-    );
-  }
-
   constructor(props) {
     super(props);
     this.state = { step: 0 };
 
     this.screenRenderFunctions = [
-      this.renderStep1, this.renderStep2, this.renderStep3, NewGame.renderStep4]
+      this.renderStep1, this.renderStep2, this.renderStep3, renderStep4]
       .map(fn => fn.bind(this));
   }
 
@@ -80,32 +85,33 @@ class NewGame extends React.Component {
   }
 
   renderStep3() {
-    return (<div>
+    return (
       <div>
-        <Container>
-          <Row>
-            <Col>
-              <b>{this.props.teamNames[1]}</b>
-            </Col>
-          </Row>
-        </Container>
-      </div>
-      {
+        <div>
+          <Container>
+            <Row>
+              <Col>
+                <b>{this.props.teamNames[1]}</b>
+              </Col>
+            </Row>
+          </Container>
+        </div>
+        {
               Array.from(Array(11).keys())
                   .map(playerIndex => (
                     <PlayerNameSelector key={`team2${playerIndex}`} team="team2" playerIndex={playerIndex} />))
           }
-      <div className="col-md-4 text-center">
-        <Button
-          onClick={() => {
+        <div className="col-md-4 text-center">
+          <Button
+            onClick={() => {
                       this.setState({ step: 3 });
                   }}
-          color="primary"
-          className="btn btn-primary"
-        >Next
-        </Button>
-      </div>
-    </div>);
+            color="primary"
+            className="btn btn-primary"
+          >Next
+          </Button>
+        </div>
+      </div>);
   }
 
   render() {
